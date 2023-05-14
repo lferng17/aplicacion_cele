@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "964310220907",
+    "project_id": "app-estudios-leoneses-c6d90",
+    "storage_bucket": "app-estudios-leoneses-c6d90.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:964310220907:android:1451c7d8aa0801bb0df12e",
+        "android_client_info": {
+          "package_name": "com.example.aplicacion"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "964310220907-eq4174b6dvknb6vk8td6445q7cucqqa4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCmdnIINrl2UGK_9_zktf59rsluIZTA3oQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "964310220907-eq4174b6dvknb6vk8td6445q7cucqqa4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:964310220907:android:4af165bd31be036b0df12e",
+        "android_client_info": {
+          "package_name": "com.example.aplicacion_cele"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "964310220907-eq4174b6dvknb6vk8td6445q7cucqqa4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCmdnIINrl2UGK_9_zktf59rsluIZTA3oQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "964310220907-eq4174b6dvknb6vk8td6445q7cucqqa4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
