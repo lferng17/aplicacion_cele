@@ -1,4 +1,4 @@
-import 'package:aplicacion_cele/screens/teacher/course_selection.dart';
+import 'package:aplicacion_cele/screens/teacher/theme_selection.dart';
 import 'package:aplicacion_cele/screens/teacher/registration.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -136,7 +136,7 @@ class _LoginTeacherState extends State<LoginTeacher> {
       .then((uid) => {
         Fluttertoast.showToast(msg: "Login successful"),
         Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => CourseSelection())
+          MaterialPageRoute(builder: (context) => ThemeSelection())
         )
       }).catchError((e){
         Fluttertoast.showToast(msg: e!.message);
