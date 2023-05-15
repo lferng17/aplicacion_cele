@@ -212,7 +212,7 @@ class _RegistrationState extends State<Registration> {
     userModel.secondName = secondNameController.text;
     
     await firebaseFirestore.collection("users")
-        .doc(user.uid)
+        .doc(user.email)
         .set(userModel.toMap());
     
     Fluttertoast.showToast(msg: "Cuenta creada correctamente");

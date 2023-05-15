@@ -34,11 +34,7 @@ class _ThemeSelectionState extends State<ThemeSelection>{
           String code = codigoAleatorio();
           Fluttertoast.showToast(msg: "Codigo: $code");
           // guardar actividad en la base de datos
-          FirebaseFirestore.instance.collection("activities").doc(code).set({
-            "code": code,         
-            "questions": ["01","02","03","04"],
-            "teacher": _auth.currentUser!.email,
-          });
+          addActivity(code);
         },
         child: Text("Reñubero",
           textAlign: TextAlign.center,
@@ -101,6 +97,24 @@ class _ThemeSelectionState extends State<ThemeSelection>{
 
   }
 
+  // funcion para añadir la actividad en la base de datos
+  Future<void> addActivity(String code) async {
+  // Comprobar si existe una actividad con el mismo código
+  final activityRef = FirebaseFirestore.instance.collection("activities").doc(code);
+  final activityDoc = await activityRef.get();
+
+  if (activityDoc.exists) {
+    // Si existe, eliminar la actividad antes de insertar la nueva
+    await activityRef.delete();
+  }
+
+  // Insertar la nueva actividad en la base de datos
+  await activityRef.set({
+    "code": code,
+    "questions": ["01", "02", "03", "04"],
+    "teacher": _auth.currentUser!.email,
+  });
+}
 
 
 

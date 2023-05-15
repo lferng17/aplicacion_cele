@@ -1,4 +1,5 @@
 import 'package:aplicacion_cele/screens/teacher/login_teacher.dart';
+import 'package:aplicacion_cele/screens/waitingPage.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
@@ -61,7 +62,11 @@ class _HomeState extends State<Home>{
         minWidth: MediaQuery.of(context).size.width,
         padding: EdgeInsets.fromLTRB(10.0, 15.0, 10.0, 15.0),
 
-        onPressed: () {},
+        onPressed: () {
+          Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => WaitingPage())
+        );
+        },
         child: Text("Acceder",
           textAlign: TextAlign.center,
           style: TextStyle(
