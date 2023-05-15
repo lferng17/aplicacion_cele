@@ -1,4 +1,7 @@
+import 'dart:ffi';
+
 import 'package:aplicacion_cele/screens/questions/question_01.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 
@@ -20,6 +23,12 @@ class _WaitingPageState extends State<WaitingPage> {
     });
   }
 
+
+
+  // firebase
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,4 +43,17 @@ class _WaitingPageState extends State<WaitingPage> {
       ),
     );
   }
+
+
+
+  void questionSelector(){
+
+    //Del código introducido, sacar el vector questions de la base de datos
+    
+
+
+
+  }
+
 }
+
