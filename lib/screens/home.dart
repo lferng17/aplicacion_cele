@@ -28,6 +28,14 @@ class _HomeState extends State<Home>{
 
 
   @override
+  void initState() {
+    super.initState();
+    //Al iniciar la app, se comprueba si el usuario está logueado, si lo está, se le cierra la sesión
+    checkUserLoggedIn();
+  }
+
+
+  @override
   Widget build(BuildContext context) {
 
     // code field
@@ -145,7 +153,15 @@ class _HomeState extends State<Home>{
 
   }
 
-  
+  void checkUserLoggedIn() {
+  _auth.authStateChanges().listen((User? user) {
+    if (user == null) {
+      // No hay usuario logueado,
+    } else {
+      _auth.signOut();
+    }
+  });
+}
 
 
 
