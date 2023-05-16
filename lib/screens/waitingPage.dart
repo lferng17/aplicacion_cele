@@ -56,4 +56,3 @@ class _WaitingPageState extends State<WaitingPage> {
   }
 
 }
-

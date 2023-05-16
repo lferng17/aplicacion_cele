@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:aplicacion_cele/screens/teacher/login_teacher.dart';
 import 'package:aplicacion_cele/screens/waitingPage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -14,6 +15,9 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home>{
+
+  // auth
+  final FirebaseAuth _auth = FirebaseAuth.instance;
  
   // form key
   final _formKey = GlobalKey<FormState>();
@@ -140,6 +144,8 @@ class _HomeState extends State<Home>{
 
 
   }
+
+  
 
 
 

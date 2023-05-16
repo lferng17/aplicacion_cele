@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:aplicacion_cele/screens/home.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +33,26 @@ class _ThemeSelectionState extends State<ThemeSelection>{
         onPressed: (){
           // generar codigo aleatorio
           String code = codigoAleatorio();
-          Fluttertoast.showToast(msg: "Codigo: $code");
+          //Ventana emergente para mostrar el codigo, con un botón para aceptar y cerrar la ventana y la sesión
+          showDialog(
+            context: context,
+            builder: (BuildContext context){
+              return AlertDialog(
+                title: Text("Código de acceso"),
+                content: Text(code),
+                actions: [
+                  TextButton(
+                    onPressed: (){
+                      // cerrar ventana emergente, sesión y volver a la pantalla de Home
+                      Navigator.of(context).pop();
+                      signOut(context);
+                    },
+                    child: Text("Aceptar"),
+                  ),
+                ],
+              );
+            }
+          );
           // guardar actividad en la base de datos
           addActivity(code);
         },
@@ -115,6 +135,12 @@ class _ThemeSelectionState extends State<ThemeSelection>{
     "teacher": _auth.currentUser!.email,
   });
 }
+
+
+Future<void> signOut(BuildContext context) async {
+    await FirebaseAuth.instance.signOut();
+    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => Home()));
+  }
 
 
 
