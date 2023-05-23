@@ -2,10 +2,10 @@ class StudentModel{
   String? alias;
   String? activityCode;
   String? points;
-  String? studentID;
+  String? uid;
+  String? inventedEmail;
 
-
-  StudentModel({this.alias, this.activityCode, this.points, this.studentID});
+  StudentModel({this.alias, this.activityCode, this.points, this.uid, this.inventedEmail});
 
   // recibir datos del servidor
   factory StudentModel.fromMap(map){
@@ -13,7 +13,8 @@ class StudentModel{
       alias: map['alias'],
       activityCode: map['activityCode'],
       points: map['points'],
-      studentID: map['studentID'],
+      uid: map['uid'],
+      inventedEmail: map['inventedEmail'],
     );
   }
 
@@ -23,7 +24,8 @@ class StudentModel{
       'alias': alias,
       'activityCode': activityCode,
       'points': points,
-      'studentID': studentID,
+      'uid': uid,
+      'inventedEmail': inventedEmail,
     };
   }
 

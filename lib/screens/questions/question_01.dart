@@ -22,7 +22,7 @@ class _Question01State extends State<Question01> {
       ),
       body: Center(
         child: Text(
-          'Holaaaaaaa ',
+          'Bienvenido: ' + FirebaseAuth.instance.currentUser!.email.toString(),
           style: TextStyle(fontSize: 24),
         ),
       ),

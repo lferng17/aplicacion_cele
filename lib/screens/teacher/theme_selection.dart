@@ -5,6 +5,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+import '../../models/user_model.dart';
+
 class ThemeSelection extends StatefulWidget {
   const ThemeSelection({Key? key}) : super(key: key);
   
@@ -18,7 +20,27 @@ class _ThemeSelectionState extends State<ThemeSelection>{
   // auth
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-   @override
+  // user
+  UserModel loggedInUser = UserModel();
+
+  @override
+  void initState() {
+    super.initState();
+    final User? currentUser = FirebaseAuth.instance.currentUser;
+    if (currentUser != null) {
+      FirebaseFirestore.instance
+          .collection('users')
+          .doc(currentUser.email)
+          .get()
+          .then((value) {
+        setState(() {
+          loggedInUser = UserModel.fromMap(value.data());
+        });
+      });
+    }
+  }
+
+  @override
   Widget build(BuildContext context){
 
     // boton para seleccionar el tema del renubero
@@ -98,7 +120,9 @@ class _ThemeSelectionState extends State<ThemeSelection>{
       body: Center(
         child: Column(
           children: <Widget>[
-            Text("Bienvenido"),
+            //Imprime el correo del usuario que ha iniciado sesión
+            Text(loggedInUser.email ?? 'Correo electrónico no disponible'),
+            Text("Bienvenido ${loggedInUser.email}"),
             renuberoButton,
             pendonButton,
           ],
