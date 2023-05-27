@@ -129,7 +129,7 @@ class _HomeState extends State<Home> {
       Fluttertoast.showToast(msg: e!.message);
     });
 
-    //Tras 4 segundos llama a la funcion signInStudent
+    //Tras 1 segundo llama a la funcion signInStudent
     Future.delayed(const Duration(seconds: 1), () {
       signInStudent(email, password);
     });

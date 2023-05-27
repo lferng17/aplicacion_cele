@@ -154,8 +154,8 @@ class _ThemeSelectionState extends State<ThemeSelection>{
   // Insertar la nueva actividad en la base de datos
   await activityRef.set({
     "code": code,
-    "questions": ["01", "02", "03", "04"],
-    "teacher": _auth.currentUser!.email,
+    "questions": "renubero",
+    "teacher": loggedInUser.email,
   });
 }
 

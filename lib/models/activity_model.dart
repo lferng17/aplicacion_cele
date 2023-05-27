@@ -3,7 +3,7 @@ import 'dart:ffi';
 class ActivityModel{
   String? aid;
   String? code;
-  Array? questions;
+  String? questions;
   String? teacher;
 
 

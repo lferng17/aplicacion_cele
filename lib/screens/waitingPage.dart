@@ -1,33 +1,56 @@
 import 'dart:ffi';
 
+import 'package:aplicacion_cele/screens/home.dart';
 import 'package:aplicacion_cele/screens/questions/question_01.dart';
+import 'package:aplicacion_cele/screens/questions/question_02.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 
+import '../models/activity_model.dart';
+import '../models/student_model.dart';
+
 class WaitingPage extends StatefulWidget {
+  const WaitingPage({Key? key}) : super(key: key);
+
   @override
   _WaitingPageState createState() => _WaitingPageState();
+
 }
 
 class _WaitingPageState extends State<WaitingPage> {
+
+  // user
+  StudentModel loggedInStudent = StudentModel();
+
+  // activity
+  ActivityModel currentActivity = ActivityModel();
+
+  // Firebase
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+
   @override
   void initState() {
     super.initState();
+    final User? currentUser = FirebaseAuth.instance.currentUser;
+    if (currentUser != null) {
+      FirebaseFirestore.instance
+          .collection('students')
+          .doc(currentUser.email)
+          .get()
+          .then((value) {
+        setState(() {
+          loggedInStudent = StudentModel.fromMap(value.data());
+        });
+      });
+    }
     Timer(Duration(seconds: 4), () {
       // Navegar a otra página después de 4 segundos
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => Question01()),
-      );
+      redirectToQuestion(context); // Cambia el número de pregunta según sea necesario
     });
   }
-
-
-
-  // firebase
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-
 
   @override
   Widget build(BuildContext context) {
@@ -44,15 +67,45 @@ class _WaitingPageState extends State<WaitingPage> {
     );
   }
 
-
-
-  void questionSelector(){
-
-    //Del código introducido, sacar el vector questions de la base de datos
-    
-
-
-
+  Future<void> redirectToQuestion(BuildContext context) async {
+  try {
+    //Del código introducido, sacar el string questions de la base de datos
+    String activityCode = loggedInStudent.activityCode.toString();
+    DocumentSnapshot activitySnapshot = await FirebaseFirestore.instance
+        .collection('activities')
+        .doc(activityCode)
+        .get();
+    setState(() {
+      currentActivity = ActivityModel.fromMap(activitySnapshot.data());
+    });
+    print("currentActivity: " + currentActivity.code.toString());
+    if (currentActivity.questions != "") {
+      // Redirige a la clase correspondiente según el tema de la pregunta
+      String questionClassName = currentActivity.questions.toString();
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => getQuestionClass(questionClassName)),
+      );
+    } else {
+      // La pregunta no se encontró en Firebase
+      print('La pregunta no existe en Firebase.');
+    }
+  } catch (e) {
+    print('Error al redirigir a la pregunta');
   }
+}
+
+Widget getQuestionClass(String questionClassName) {
+  switch (questionClassName) {
+    case "renubero":
+      return Question01();
+    case "pendon":
+      return Question02();
+    default:
+      return Home();
+  }
+}
+
+
 
 }
