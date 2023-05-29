@@ -67,7 +67,7 @@ class _HomeState extends State<Home> {
           String email = nameController.text +
               codeController.text +
               (Random().nextInt(90) + 10).toString() +
-              "@gmail.com";
+              "@appcele.com";
           String password = nameController.text + codeController.text;
           signUpStudent(email, password);
         },
