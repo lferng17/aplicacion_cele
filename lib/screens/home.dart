@@ -76,7 +76,7 @@ class _HomeState extends State<Home> {
       height: 50,
       margin: EdgeInsets.symmetric(horizontal: 50),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(50), color: Colors.orange[900]),
+          borderRadius: BorderRadius.circular(50), color: Color.fromARGB(255, 135, 207, 122)),
       child: MaterialButton(
         minWidth: MediaQuery.of(context).size.width,
         onPressed: () {
@@ -90,7 +90,7 @@ class _HomeState extends State<Home> {
         child: Text(
           "Acceder",
           textAlign: TextAlign.center,
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18.0,),
         ),
       ),
     );
@@ -100,9 +100,9 @@ class _HomeState extends State<Home> {
         width: double.infinity,
         decoration: BoxDecoration(
             gradient: LinearGradient(begin: Alignment.topCenter, colors: [
-          Colors.orange[900]!,
-          Colors.orange[800]!,
-          Colors.orange[400]!
+          Colors.green[600]!,
+          Colors.green[400]!,
+          Colors.green[200]!
         ])),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -151,7 +151,7 @@ class _HomeState extends State<Home> {
                               borderRadius: BorderRadius.circular(10),
                               boxShadow: [
                                 BoxShadow(
-                                    color: Color.fromRGBO(225, 95, 27, .3),
+                                    color: Color.fromRGBO(62, 159, 29, 0.294),
                                     blurRadius: 20,
                                     offset: Offset(0, 10))
                               ]),

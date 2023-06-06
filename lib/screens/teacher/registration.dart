@@ -14,7 +14,6 @@ class Registration extends StatefulWidget {
 }
 
 class _RegistrationState extends State<Registration> {
-
   // auth
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
@@ -32,7 +31,11 @@ class _RegistrationState extends State<Registration> {
   @override
   Widget build(BuildContext context) {
     // email field
-    final emailField = TextFormField(
+    final emailField = Container(
+      padding: EdgeInsets.all(10),
+      decoration: BoxDecoration(
+          border: Border(bottom: BorderSide(color: Colors.grey[200]!))),
+      child: TextFormField(
         autofocus: false,
         controller: emailController,
         keyboardType: TextInputType.emailAddress,
@@ -52,95 +55,133 @@ class _RegistrationState extends State<Registration> {
         },
         textInputAction: TextInputAction.next,
         decoration: InputDecoration(
-          prefixIcon: Icon(Icons.email),
-        ));
+            hintText: "Email",
+            hintStyle: TextStyle(color: Colors.grey),
+            border: InputBorder.none),
+      ),
+    );
 
     // first name field
-    final firstNameField = TextFormField(
-      autofocus: false,
-      controller: firstNameController,
-      validator: (value) {
-        if (value!.isEmpty) {
-          return 'Por favor ingrese su nombre';
-        }
-        // reg expression for password validation
-        if (value.length < 3) {
-          return 'El nombre debe tener al menos 3 caracteres';
-        }
-        return null;
-      },
-      onSaved: (value) {
-        firstNameController.text = value!;
-      },
-
-      textInputAction: TextInputAction.next,
+    final firstNameField = Container(
+      padding: EdgeInsets.all(10),
+      decoration: BoxDecoration(
+          border: Border(bottom: BorderSide(color: Colors.grey[200]!))),
+      child: TextFormField(
+        autofocus: false,
+        controller: firstNameController,
+        validator: (value) {
+          if (value!.isEmpty) {
+            return 'Por favor ingrese su nombre';
+          }
+          // reg expression for password validation
+          if (value.length < 3) {
+            return 'El nombre debe tener al menos 3 caracteres';
+          }
+          return null;
+        },
+        onSaved: (value) {
+          firstNameController.text = value!;
+        },
+        decoration: InputDecoration(
+            hintText: "Nombre",
+            hintStyle: TextStyle(color: Colors.grey),
+            border: InputBorder.none),
+        textInputAction: TextInputAction.next,
+      ),
     );
 
     // second name field
-    final secondNameField = TextFormField(
-      autofocus: false,
-      controller: secondNameController,
-      validator: (value) {
-        if (value!.isEmpty) {
-          return 'Por favor ingrese su apellido';
-        }
-        // reg expression for password validation
-        if (value.length < 3) {
-          return 'El apellido debe tener al menos 3 caracteres';
-        }
-        return null;
-      },
-      onSaved: (value) {
-        secondNameController.text = value!;
-      },
-
-      textInputAction: TextInputAction.next,
+    final secondNameField = Container(
+      padding: EdgeInsets.all(10),
+      decoration: BoxDecoration(
+          border: Border(bottom: BorderSide(color: Colors.grey[200]!))),
+      child: TextFormField(
+        autofocus: false,
+        controller: secondNameController,
+        validator: (value) {
+          if (value!.isEmpty) {
+            return 'Por favor ingrese su apellido';
+          }
+          // reg expression for password validation
+          if (value.length < 3) {
+            return 'El apellido debe tener al menos 3 caracteres';
+          }
+          return null;
+        },
+        onSaved: (value) {
+          secondNameController.text = value!;
+        },
+        decoration: InputDecoration(
+            hintText: "Apellidos",
+            hintStyle: TextStyle(color: Colors.grey),
+            border: InputBorder.none),
+        textInputAction: TextInputAction.next,
+      ),
     );
 
     // password field
-    final passwordField = TextFormField(
-      autofocus: false,
-      controller: passwordController,
-      validator: (value) {
-        if (value!.isEmpty) {
-          return 'Por favor ingrese su contraseña';
-        }
-        // reg expression for password validation
-        if (value.length < 6) {
-          return 'La contraseña debe tener al menos 6 caracteres';
-        }
-        return null;
-      },
-      onSaved: (value) {
-        passwordController.text = value!;
-      },
-
-      textInputAction: TextInputAction.next,
+    final passwordField = Container(
+      padding: EdgeInsets.all(10),
+      decoration: BoxDecoration(
+          border: Border(bottom: BorderSide(color: Colors.grey[200]!))),
+      child: TextFormField(
+        autofocus: false,
+        controller: passwordController,
+        validator: (value) {
+          if (value!.isEmpty) {
+            return 'Por favor ingrese su contraseña';
+          }
+          // reg expression for password validation
+          if (value.length < 6) {
+            return 'La contraseña debe tener al menos 6 caracteres';
+          }
+          return null;
+        },
+        onSaved: (value) {
+          passwordController.text = value!;
+        },
+        obscureText: true,
+        decoration: InputDecoration(
+            hintText: "Contraseña",
+            hintStyle: TextStyle(color: Colors.grey),
+            border: InputBorder.none),
+        textInputAction: TextInputAction.next,
+      ),
     );
 
     // second name field
-    final confirmPasswordField = TextFormField(
-      autofocus: false,
-      controller: confirmPasswordController,
-      validator:(value){
-        if(passwordController.text != confirmPasswordController.text){
-          return 'Las contraseñas no coinciden';
-        }
-        return null;
-
-      },
-      onSaved: (value) {
-        confirmPasswordController.text = value!;
-      },
-
-      textInputAction: TextInputAction.done,
+    final confirmPasswordField = Container(
+      padding: EdgeInsets.all(10),
+      decoration: BoxDecoration(
+          border: Border(bottom: BorderSide(color: Colors.grey[200]!))),
+      child: TextFormField(
+        autofocus: false,
+        controller: confirmPasswordController,
+        validator: (value) {
+          if (passwordController.text != confirmPasswordController.text) {
+            return 'Las contraseñas no coinciden';
+          }
+          return null;
+        },
+        onSaved: (value) {
+          confirmPasswordController.text = value!;
+        },
+        obscureText: true,
+        decoration: InputDecoration(
+            hintText: "Confirme contraseña",
+            hintStyle: TextStyle(color: Colors.grey),
+            border: InputBorder.none),
+        textInputAction: TextInputAction.done,
+      ),
     );
 
     // register button
-    final registerButton = Material(
-      elevation: 5.0,
-      borderRadius: BorderRadius.circular(25.0),
-      color: Colors.blue,
+    final registerButton = Container(
+      height: 50,
+      margin: EdgeInsets.symmetric(horizontal: 50),
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(50),
+          color: Color.fromARGB(255, 123, 197, 110)),
       child: MaterialButton(
         minWidth: MediaQuery.of(context).size.width,
         padding: EdgeInsets.fromLTRB(10.0, 15.0, 10.0, 15.0),
@@ -150,56 +191,117 @@ class _RegistrationState extends State<Registration> {
         child: Text("Registrarse",
             textAlign: TextAlign.center,
             style: TextStyle(
-                fontSize: 20.0,
+                fontSize: 18.0,
                 color: Colors.white,
                 fontWeight: FontWeight.bold)),
       ),
     );
 
     return Scaffold(
-        backgroundColor: Colors.white,
-        body: Center(
-          child: SingleChildScrollView(
-            child: Container(
-              color: Colors.white,
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  children: <Widget>[
-                    firstNameField,
-                    secondNameField,
-                    emailField,
-                    passwordField,
-                    confirmPasswordField,
-                    registerButton,
-                  ],
-                ),
+      body: Container(
+        width: double.infinity,
+        decoration: BoxDecoration(
+            gradient: LinearGradient(begin: Alignment.topCenter, colors: [
+          Colors.green[600]!,
+          Colors.green[400]!,
+          Colors.green[200]!
+        ])),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            SizedBox(
+              height: 80,
+            ),
+            Padding(
+              padding: EdgeInsets.all(20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    "Registro",
+                    style: TextStyle(color: Colors.white, fontSize: 40),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    "Profesor/Tutor",
+                    style: TextStyle(color: Colors.white, fontSize: 18),
+                  ),
+                ],
               ),
             ),
-          ),
-        ));
+            SizedBox(height: 20),
+            Expanded(
+              child: Container(
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(60),
+                        topRight: Radius.circular(60))),
+                child: SingleChildScrollView(
+                  child: Padding(
+                    padding: EdgeInsets.all(30),
+                    child: Column(
+                      children: <Widget>[
+                        SizedBox(
+                          height: 60,
+                        ),
+                        Container(
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10),
+                              boxShadow: [
+                                BoxShadow(
+                                    color: Color.fromRGBO(62, 159, 29, 0.294),
+                                    blurRadius: 20,
+                                    offset: Offset(0, 10))
+                              ]),
+                          child: Form(
+                            key: _formKey,
+                            child: Column(
+                              children: <Widget>[
+                                firstNameField,
+                                secondNameField,
+                                emailField,
+                                passwordField,
+                                confirmPasswordField,
+                              ],
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 40,
+                        ),
+                        registerButton,
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
   }
 
   void signUp(String email, String password) async {
-
     if (_formKey.currentState!.validate()) {
-      await _auth.createUserWithEmailAndPassword(email: email, password: password)
-      .then((value) => {
-        postDetailsToFirestore()
-      }).catchError((e){
+      await _auth
+          .createUserWithEmailAndPassword(email: email, password: password)
+          .then((value) => {postDetailsToFirestore()})
+          .catchError((e) {
         Fluttertoast.showToast(msg: e!.message);
       });
     }
-
   }
 
-
-  postDetailsToFirestore() async{
-
+  postDetailsToFirestore() async {
     // calling our firestore
     // calling our user model
     // sending these values
- 
+
     FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
     User? user = _auth.currentUser;
 
@@ -210,16 +312,17 @@ class _RegistrationState extends State<Registration> {
     userModel.uid = user.uid;
     userModel.firstName = firstNameController.text;
     userModel.secondName = secondNameController.text;
-    
-    await firebaseFirestore.collection("users")
+
+    await firebaseFirestore
+        .collection("users")
         .doc(user.email)
         .set(userModel.toMap());
-    
+
     Fluttertoast.showToast(msg: "Cuenta creada correctamente");
 
-    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => LoginTeacher()), (route) => false);
-
+    Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) => LoginTeacher()),
+        (route) => false);
   }
-
-
 }
