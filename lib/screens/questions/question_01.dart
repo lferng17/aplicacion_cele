@@ -52,56 +52,135 @@ class _Question01State extends State<Question01> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Pregunta 01'),
+        title: Text('Pregunta 1'),
+        backgroundColor: Colors.green[600],
       ),
-      body: Center(
+      body: Container(
+        width: double.infinity,
+        decoration: BoxDecoration(
+            gradient: LinearGradient(begin: Alignment.topCenter, colors: [
+          Colors.green[600]!,
+          Colors.green[400]!,
+          Colors.green[200]!
+        ])),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'Bienvenido: ' + loggedInStudent.alias.toString(),
-              style: TextStyle(fontSize: 24),
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            SizedBox(
+              height: 20,
             ),
-            SizedBox(height: 20),
-            Text(
-              question,
-              style: TextStyle(fontSize: 20),
+            Padding(
+              padding: EdgeInsets.all(20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    question,
+                    style: TextStyle(color: Colors.white, fontSize: 22),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                ],
+              ),
             ),
-            SizedBox(height: 20),
-            Column(
-              children: [
-                buildAnswerOption(renubon),
-                buildAnswerOption(nubero),
-                buildAnswerOption(renubero),
-                buildAnswerOption(nubarron),
-                buildAnswerOption(rinobero),
-                buildAnswerOption(renueva),
-              ],
-            ),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                setState(() {
-                  showResults = true;
-                  isCorrectionEnabled = false; //Bloquear respuestas
-                });
-              },
-              child: Text('Corregir'),
-            ),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                setState(() {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => Question02(),
+            SizedBox(height: 10),
+            Expanded(
+              child: Container(
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(60),
+                        topRight: Radius.circular(60))),
+                child: SingleChildScrollView(
+                  child: Padding(
+                    padding: EdgeInsets.all(30),
+                    child: Column(
+                      children: <Widget>[
+                        SizedBox(
+                          height: 30,
+                        ),
+                        Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Column(
+                            children: <Widget>[
+                              buildAnswerOption(renubon),
+                              buildAnswerOption(nubero),
+                              buildAnswerOption(renubero),
+                              buildAnswerOption(nubarron),
+                              buildAnswerOption(rinobero),
+                              buildAnswerOption(renueva),
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          height: 40,
+                        ),
+                        Container(
+                          width: 100,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(50),
+                              color: Colors.green[500]!),
+                          child: MaterialButton(
+                            onPressed: () {
+                              setState(() {
+                                showResults = true;
+                                isCorrectionEnabled =
+                                    false; //Bloquear respuestas
+                              });
+                            },
+                            
+                            child: Text(
+                              "Corregir",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 14.0,
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 40,
+                        ),
+                        Container(
+                          height: 50,
+                          width: 130,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(50),
+                              color: Colors.green[600]!),
+                          child: MaterialButton(
+                            onPressed: () {
+                              setState(() {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => Question02(),
+                                  ),
+                                );
+                              });
+                            },
+                            child: Text(
+                              "Siguiente",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16.0,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                  );
-                });
-              },
-              child: Text('Siguiente'),
-            ),
+                  ),
+                ),
+              ),
+            )
           ],
         ),
       ),
@@ -113,28 +192,35 @@ class _Question01State extends State<Question01> {
     bool isCorrect = correctAnswers.contains(answer);
 
     Color borderColor;
+    Color backgroundColor;
     IconData? iconData;
 
     if (showResults) {
       if (isSelected && isCorrect) {
         borderColor = Colors.green;
+        backgroundColor = Colors.green[100]!;
         iconData = Icons.check;
       } else if (isSelected && !isCorrect) {
-        borderColor = Colors.red;
+        borderColor = Colors.red[100]!;
+        backgroundColor = Colors.red[100]!;
         iconData = Icons.cancel;
       } else if (!isSelected && isCorrect) {
         borderColor = Colors.green;
+        backgroundColor = Colors.white;
       } else {
         borderColor = Colors.black26;
+        backgroundColor = Colors.white;
       }
     } else {
       borderColor = isSelected ? Colors.green : Colors.black26;
+      backgroundColor = isSelected ? Colors.green[50]! : Colors.white;
     }
 
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 4.0),
       child: Container(
         decoration: BoxDecoration(
+          color: backgroundColor,
           border: Border.all(
             color: borderColor,
             width: 2.0,

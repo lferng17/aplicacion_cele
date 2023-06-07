@@ -1,3 +1,4 @@
+import 'package:aplicacion_cele/screens/questions/question_03.dart';
 import 'package:flutter/material.dart';
 
 class Question02 extends StatefulWidget {
@@ -54,14 +55,28 @@ class _Question02State extends State<Question02> {
                 });
               } ,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+            Wrap(
+              spacing: 10.0,
               children: [
                 Etiquetas(etiqueta1),
                 Etiquetas(etiqueta2),
                 Etiquetas(etiqueta3),
               
               ],
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                setState(() {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Question03(),
+                    ),
+                  );
+                });
+              },
+              child: Text('Siguiente'),
             ),
           ],
         ),
