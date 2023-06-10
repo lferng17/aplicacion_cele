@@ -52,7 +52,8 @@ class _Question01State extends State<Question01> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Pregunta 1'),
+        title: Text('Pregunta 01/06'),
+        centerTitle: true,
         backgroundColor: Colors.green[600],
       ),
       body: Container(
@@ -74,9 +75,11 @@ class _Question01State extends State<Question01> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text(
-                    question,
-                    style: TextStyle(color: Colors.white, fontSize: 22),
+                  Center(
+                    child: Text(
+                      question,
+                      style: TextStyle(color: Colors.white, fontSize: 22),
+                    ),
                   ),
                   SizedBox(
                     height: 10,
@@ -132,7 +135,6 @@ class _Question01State extends State<Question01> {
                                     false; //Bloquear respuestas
                               });
                             },
-                            
                             child: Text(
                               "Corregir",
                               textAlign: TextAlign.center,

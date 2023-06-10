@@ -75,8 +75,7 @@ class _Question05State extends State<Question05> {
   String question = 'Demuestra lo que conoces sobre el Reñubero';
 
   // bool para correcciones
-  bool showResults = false;
-  bool isCorrectionEnabled = true;
+  bool showResults = false; 
 
   @override
   Widget build(BuildContext context) {
@@ -128,7 +127,7 @@ class _Question05State extends State<Question05> {
                     child: Column(
                       children: <Widget>[
                         SizedBox(
-                          height: 30,
+                          height: 10,
                         ),
                         Container(
                           decoration: BoxDecoration(
@@ -145,7 +144,7 @@ class _Question05State extends State<Question05> {
                                         color: Colors.black, fontSize: 16),
                                   ),
                                   buildDropdowns(
-                                      lluviasOptions, selectedLluviasOption,
+                                      lluviasOptions, selectedLluviasOption, 'las lluvias',
                                       (value) {
                                     setState(() {
                                       selectedLluviasOption = value;
@@ -161,7 +160,7 @@ class _Question05State extends State<Question05> {
                               Row(
                                 children: <Widget>[
                                   buildDropdowns(
-                                      tormentasOptions, selectedTormentasOption,
+                                      tormentasOptions, selectedTormentasOption, 'las tormentas',
                                       (value) {
                                     setState(() {
                                       selectedTormentasOption = value;
@@ -173,7 +172,7 @@ class _Question05State extends State<Question05> {
                                         color: Colors.black, fontSize: 16),
                                   ),
                                   buildDropdowns(
-                                      personajeOptions, selectedPersonajeOption,
+                                      personajeOptions, selectedPersonajeOption, 'personaje',
                                       (value) {
                                     setState(() {
                                       selectedPersonajeOption = value;
@@ -184,7 +183,7 @@ class _Question05State extends State<Question05> {
                               Row(
                                 children: <Widget>[
                                   buildDropdowns(
-                                      ancianoOptions, selectedAncianoOption,
+                                      ancianoOptions, selectedAncianoOption, 'anciano',
                                       (value) {
                                     setState(() {
                                       selectedAncianoOption = value;
@@ -196,7 +195,7 @@ class _Question05State extends State<Question05> {
                                         color: Colors.black, fontSize: 16),
                                   ),
                                   buildDropdowns(malhumoradoOptions,
-                                      selectedMalhumoradoOption, (value) {
+                                      selectedMalhumoradoOption, 'malhumorado', (value) {
                                     setState(() {
                                       selectedMalhumoradoOption = value;
                                     });
@@ -223,7 +222,7 @@ class _Question05State extends State<Question05> {
                               Row(
                                 children: <Widget>[
                                   buildDropdowns(
-                                      humanosOptions, selectedHumanosOption,
+                                      humanosOptions, selectedHumanosOption, 'los humanos',
                                       (value) {
                                     setState(() {
                                       selectedHumanosOption = value;
@@ -251,7 +250,7 @@ class _Question05State extends State<Question05> {
                               Row(
                                 children: <Widget>[
                                   buildDropdowns(
-                                      leyendasOptions, selectedLeyendasOption,
+                                      leyendasOptions, selectedLeyendasOption, 'leonesas',
                                       (value) {
                                     setState(() {
                                       selectedLeyendasOption = value;
@@ -272,7 +271,7 @@ class _Question05State extends State<Question05> {
                                         color: Colors.black, fontSize: 16),
                                   ),
                                   buildDropdowns(
-                                      nombresOptions, selectedNombresOption,
+                                      nombresOptions, selectedNombresOption, 'Nubero, Renubero o Riñobero',
                                       (value) {
                                     setState(() {
                                       selectedNombresOption = value;
@@ -305,7 +304,7 @@ class _Question05State extends State<Question05> {
                                         color: Colors.black, fontSize: 16),
                                   ),
                                   buildDropdowns(
-                                      poderosoOptions, selectedPoderosoOption,
+                                      poderosoOptions, selectedPoderosoOption, 'poderoso',
                                       (value) {
                                     setState(() {
                                       selectedPoderosoOption = value;
@@ -333,7 +332,7 @@ class _Question05State extends State<Question05> {
                               Row(
                                 children: <Widget>[
                                   buildDropdowns(
-                                      bastonOptions, selectedBastonOption,
+                                      bastonOptions, selectedBastonOption, 'bastón de madera',
                                       (value) {
                                     setState(() {
                                       selectedBastonOption = value;
@@ -361,7 +360,7 @@ class _Question05State extends State<Question05> {
                               Row(
                                 children: <Widget>[
                                   buildDropdowns(
-                                      accionesOptions, selectedAccionesOption,
+                                      accionesOptions, selectedAccionesOption, 'rayos, truenos y chaparrones',
                                       (value) {
                                     setState(() {
                                       selectedAccionesOption = value;
@@ -389,7 +388,7 @@ class _Question05State extends State<Question05> {
                               Row(
                                 children: <Widget>[
                                   buildDropdowns(exclamacionOptions,
-                                      selectedExclamacionOption, (value) {
+                                      selectedExclamacionOption, '¡¡Rayos y centellas, luz de las estrellas!!', (value) {
                                     setState(() {
                                       selectedExclamacionOption = value;
                                     });
@@ -416,7 +415,7 @@ class _Question05State extends State<Question05> {
                                         color: Colors.black, fontSize: 16),
                                   ),
                                   buildDropdowns(
-                                      oidoOptions, selectedOidoOption, (value) {
+                                      oidoOptions, selectedOidoOption, 'el oído', (value) {
                                     setState(() {
                                       selectedOidoOption = value;
                                     });
@@ -436,7 +435,7 @@ class _Question05State extends State<Question05> {
                                         color: Colors.black, fontSize: 16),
                                   ),
                                   buildDropdowns(
-                                      hablarOptions, selectedHablarsOption,
+                                      hablarOptions, selectedHablarsOption, 'hablar',
                                       (value) {
                                     setState(() {
                                       selectedHablarsOption = value;
@@ -464,7 +463,6 @@ class _Question05State extends State<Question05> {
                             onPressed: () {
                               setState(() {
                                 showResults = true;
-                                isCorrectionEnabled = false;
                               });
                             },
                             child: Text(
@@ -521,16 +519,26 @@ class _Question05State extends State<Question05> {
     );
   }
 
-  Widget buildDropdowns(List<String> options, String? selectedOption,
+  Widget buildDropdowns(List<String> options, String? selectedOption, String? correctOption,
       Function(String?) onChanged) {
+    final isCorrectOption = selectedOption == correctOption;
+
+    //Añadir puntos, ej: selecciona mal, -2 puntos. Selecciona bien, +5 puntos.
+
     return DropdownButton<String>(
       value: selectedOption,
-      items: options
-          .map((option) => DropdownMenuItem<String>(
-                value: option,
-                child: Text(option),
-              ))
-          .toList(),
+      items: options.map((option) {
+        return DropdownMenuItem<String>(
+          value: option,
+          child: Text(
+            option,
+            style: TextStyle(
+                color: isCorrectOption
+                    ? Colors.green[600]
+                    : Colors.black),
+          ),
+        );
+      }).toList(),
       onChanged: onChanged,
       iconEnabledColor: Colors.green[600],
       style: TextStyle(color: Colors.black, fontSize: 16),

@@ -10,9 +10,10 @@ class Question03 extends StatefulWidget {
 
 class _Question03State extends State<Question03> {
   // Pregunta
-  String question = '¿Qué podría exclamar un bombero cuando algo no le sale bien?\n'
-                                'Piensa en dos versos que rimen, Como hace el Reñubero:\n'
-                                '¡¡Rayos y centellas, luz de las estrellas!!';
+  String question =
+      '¿Qué podría exclamar un bombero cuando algo no le sale bien?\n'
+      'Piensa en dos versos que rimen, Como hace el Reñubero:\n'
+      '¡¡Rayos y centellas, luz de las estrellas!!';
 
   int _currentStep = 0;
 
@@ -20,7 +21,8 @@ class _Question03State extends State<Question03> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Pregunta 3'),
+        title: Text('Pregunta 03/06'),
+        centerTitle: true,
         backgroundColor: Colors.green[600],
       ),
       body: Container(
@@ -42,9 +44,11 @@ class _Question03State extends State<Question03> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text(
-                    question,
-                    style: TextStyle(color: Colors.white, fontSize: 16),
+                  Center(
+                    child: Text(
+                      question,
+                      style: TextStyle(color: Colors.white, fontSize: 18),
+                    ),
                   ),
                   SizedBox(
                     height: 10,
