@@ -201,7 +201,7 @@ class _Question01State extends State<Question01> {
         backgroundColor = Colors.green[100]!;
         iconData = Icons.check;
       } else if (isSelected && !isCorrect) {
-        borderColor = Colors.red[100]!;
+        borderColor = Colors.red;
         backgroundColor = Colors.red[100]!;
         iconData = Icons.cancel;
       } else if (!isSelected && isCorrect) {
