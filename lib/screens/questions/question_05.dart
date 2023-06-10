@@ -23,22 +23,23 @@ class _Question05State extends State<Question05> {
   final List<String> personajeOptions = ['persona', 'personaje'];
   final List<String> ancianoOptions = ['anciano', 'joven', 'de mediana edad'];
   final List<String> malhumoradoOptions = ['alegre', 'malhumorado'];
-  final List<String> entablarOptions = [
+  final List<String> humanosOptions = [
     'los animales',
     'los humanos',
     'las plantas'
   ];
-  final List<String> leyendasOptions = [
-    'leyendas africanas',
-    'leyendas aragonesas',
-    'leyendas leonesas'
-  ];
+  final List<String> leyendasOptions = ['africanas', 'aragonesas', 'leonesas'];
   final List<String> nombresOptions = [
     'Nubarrón, Nubero o Nubecita',
     'Renovar, Renubero o Nibelungo',
     'Nubero, Renubero o Riñobero'
   ];
-  final List<String> poderOptions = ['poderoso', 'frágil', 'fuerte', 'endeble'];
+  final List<String> poderosoOptions = [
+    'poderoso',
+    'frágil',
+    'fuerte',
+    'endeble'
+  ];
   final List<String> bastonOptions = [
     'bastón de hierro',
     'bastón de plástico',
@@ -54,30 +55,34 @@ class _Question05State extends State<Question05> {
     '¡¡Rayos, truenos y venenos!!',
     '¡¡Rayos y centellas, llueven botellas!!'
   ];
-  final List<String> aguzaOptions = ['la vista', 'el oído', 'el tacto'];
-  final List<String> escuchesOptions = ['silbar', 'cantar', 'hablar'];
+  final List<String> oidoOptions = ['la vista', 'el oído', 'el tacto'];
+  final List<String> hablarOptions = ['silbar', 'cantar', 'hablar'];
 
   String? selectedLluviasOption,
       selectedTormentasOption,
       selectedPersonajeOption,
       selectedAncianoOption,
       selectedMalhumoradoOption,
-      selectedEntablarOption,
+      selectedHumanosOption,
       selectedLeyendasOption,
       selectedNombresOption,
-      selectedPoderOption,
+      selectedPoderosoOption,
       selectedBastonOption,
       selectedAccionesOption,
       selectedExclamacionOption,
-      selectedAguzaOption,
-      selectedEscuchesOption;
+      selectedOidoOption,
+      selectedHablarsOption;
   String question = 'Demuestra lo que conoces sobre el Reñubero';
+
+  // bool para correcciones
+  bool showResults = false;
+  bool isCorrectionEnabled = true;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Pregunta 4'),
+        title: Text('Pregunta 5'),
         backgroundColor: Colors.green[600],
       ),
       body: Container(
@@ -215,6 +220,235 @@ class _Question05State extends State<Question05> {
                                   ),
                                 ],
                               ),
+                              Row(
+                                children: <Widget>[
+                                  buildDropdowns(
+                                      humanosOptions, selectedHumanosOption,
+                                      (value) {
+                                    setState(() {
+                                      selectedHumanosOption = value;
+                                    });
+                                  }),
+                                  Text(
+                                    ' . Aunque la mayoría le ',
+                                    style: TextStyle(
+                                        color: Colors.black, fontSize: 16),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: <Widget>[
+                                  SizedBox(
+                                    height: 40,
+                                  ),
+                                  Text(
+                                    'conocen como Reñubero, en las leyendas',
+                                    style: TextStyle(
+                                        color: Colors.black, fontSize: 16),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: <Widget>[
+                                  buildDropdowns(
+                                      leyendasOptions, selectedLeyendasOption,
+                                      (value) {
+                                    setState(() {
+                                      selectedLeyendasOption = value;
+                                    });
+                                  }),
+                                  Text(
+                                    ' tiene también otros nombres',
+                                    style: TextStyle(
+                                        color: Colors.black, fontSize: 16),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: <Widget>[
+                                  Text(
+                                    'como ',
+                                    style: TextStyle(
+                                        color: Colors.black, fontSize: 16),
+                                  ),
+                                  buildDropdowns(
+                                      nombresOptions, selectedNombresOption,
+                                      (value) {
+                                    setState(() {
+                                      selectedNombresOption = value;
+                                    });
+                                  }),
+                                  Text(
+                                    ' .',
+                                    style: TextStyle(
+                                        color: Colors.black, fontSize: 16),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: <Widget>[
+                                  SizedBox(
+                                    height: 40,
+                                  ),
+                                  Text(
+                                    'Domina las lluvias, las tempestades, las ',
+                                    style: TextStyle(
+                                        color: Colors.black, fontSize: 16),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: <Widget>[
+                                  Text(
+                                    'tormentas y por eso es muy ',
+                                    style: TextStyle(
+                                        color: Colors.black, fontSize: 16),
+                                  ),
+                                  buildDropdowns(
+                                      poderosoOptions, selectedPoderosoOption,
+                                      (value) {
+                                    setState(() {
+                                      selectedPoderosoOption = value;
+                                    });
+                                  }),
+                                  Text(
+                                    ' .',
+                                    style: TextStyle(
+                                        color: Colors.black, fontSize: 16),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: <Widget>[
+                                  SizedBox(
+                                    height: 40,
+                                  ),
+                                  Text(
+                                    'Siempre va acompañado de un viejo',
+                                    style: TextStyle(
+                                        color: Colors.black, fontSize: 16),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: <Widget>[
+                                  buildDropdowns(
+                                      bastonOptions, selectedBastonOption,
+                                      (value) {
+                                    setState(() {
+                                      selectedBastonOption = value;
+                                    });
+                                  }),
+                                  Text(
+                                    ' con el que inicia las',
+                                    style: TextStyle(
+                                        color: Colors.black, fontSize: 16),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: <Widget>[
+                                  SizedBox(
+                                    height: 40,
+                                  ),
+                                  Text(
+                                    'tormentas, provoca ',
+                                    style: TextStyle(
+                                        color: Colors.black, fontSize: 16),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: <Widget>[
+                                  buildDropdowns(
+                                      accionesOptions, selectedAccionesOption,
+                                      (value) {
+                                    setState(() {
+                                      selectedAccionesOption = value;
+                                    });
+                                  }),
+                                  Text(
+                                    ' . Por eso',
+                                    style: TextStyle(
+                                        color: Colors.black, fontSize: 16),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: <Widget>[
+                                  SizedBox(
+                                    height: 40,
+                                  ),
+                                  Text(
+                                    'su exclamación favorita es: ',
+                                    style: TextStyle(
+                                        color: Colors.black, fontSize: 16),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: <Widget>[
+                                  buildDropdowns(exclamacionOptions,
+                                      selectedExclamacionOption, (value) {
+                                    setState(() {
+                                      selectedExclamacionOption = value;
+                                    });
+                                  }),
+                                ],
+                              ),
+                              Row(
+                                children: <Widget>[
+                                  SizedBox(
+                                    height: 40,
+                                  ),
+                                  Text(
+                                    'Cuando veas nubarrones y empiece una',
+                                    style: TextStyle(
+                                        color: Colors.black, fontSize: 16),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: <Widget>[
+                                  Text(
+                                    'tormenta, aguza ',
+                                    style: TextStyle(
+                                        color: Colors.black, fontSize: 16),
+                                  ),
+                                  buildDropdowns(
+                                      oidoOptions, selectedOidoOption, (value) {
+                                    setState(() {
+                                      selectedOidoOption = value;
+                                    });
+                                  }),
+                                  Text(
+                                    ' ... quizá lo',
+                                    style: TextStyle(
+                                        color: Colors.black, fontSize: 16),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: <Widget>[
+                                  Text(
+                                    'escuches ',
+                                    style: TextStyle(
+                                        color: Colors.black, fontSize: 16),
+                                  ),
+                                  buildDropdowns(
+                                      hablarOptions, selectedHablarsOption,
+                                      (value) {
+                                    setState(() {
+                                      selectedHablarsOption = value;
+                                    });
+                                  }),
+                                  Text(
+                                    ' ... ',
+                                    style: TextStyle(
+                                        color: Colors.black, fontSize: 16),
+                                  ),
+                                ],
+                              ),
                             ],
                           ),
                         ),
@@ -228,7 +462,10 @@ class _Question05State extends State<Question05> {
                               color: Colors.green[500]!),
                           child: MaterialButton(
                             onPressed: () {
-                              setState(() {});
+                              setState(() {
+                                showResults = true;
+                                isCorrectionEnabled = false;
+                              });
                             },
                             child: Text(
                               "Corregir",
