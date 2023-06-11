@@ -1,3 +1,4 @@
+import 'package:aplicacion_cele/screens/questions/question_06.dart';
 import 'package:flutter/material.dart';
 
 import '../../models/student_model.dart';
@@ -491,7 +492,7 @@ class _Question05State extends State<Question05> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => Question05(),
+                                    builder: (context) => Question06(),
                                   ),
                                 );
                               });
