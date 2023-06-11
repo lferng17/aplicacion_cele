@@ -8,6 +8,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -76,7 +77,8 @@ class _HomeState extends State<Home> {
       height: 50,
       margin: EdgeInsets.symmetric(horizontal: 50),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(50), color: Color.fromARGB(255, 135, 207, 122)),
+          borderRadius: BorderRadius.circular(50),
+          color: Color.fromARGB(255, 135, 207, 122)),
       child: MaterialButton(
         minWidth: MediaQuery.of(context).size.width,
         onPressed: () {
@@ -90,7 +92,11 @@ class _HomeState extends State<Home> {
         child: Text(
           "Acceder",
           textAlign: TextAlign.center,
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18.0,),
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+            fontSize: 18.0,
+          ),
         ),
       ),
     );
@@ -122,9 +128,20 @@ class _HomeState extends State<Home> {
                   SizedBox(
                     height: 10,
                   ),
-                  Text(
-                    "Universidad de León",
-                    style: TextStyle(color: Colors.white, fontSize: 18),
+                  DefaultTextStyle(
+                    style: const TextStyle(
+                      fontSize: 18.0,
+                    ),
+                    child: AnimatedTextKit(
+                      animatedTexts: [
+                        TypewriterAnimatedText('Universidad de León', speed: const Duration(milliseconds: 250)),                       
+                      ],
+                      totalRepeatCount: 4,
+                      pause: const Duration(milliseconds: 2000),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
                   ),
                 ],
               ),
