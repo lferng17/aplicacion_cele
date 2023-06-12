@@ -71,7 +71,7 @@ class _ThemeSelectionState extends State<ThemeSelection> {
                 );
               });
           // guardar actividad en la base de datos
-          addActivity(code);
+          addActivity(code, 'renubero');
         },
         child: Text(
           "Reñubero",
@@ -93,7 +93,31 @@ class _ThemeSelectionState extends State<ThemeSelection> {
       child: MaterialButton(
         minWidth: MediaQuery.of(context).size.width,
         padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-        onPressed: () {},
+        onPressed: () {
+          // generar codigo aleatorio
+          String code = codigoAleatorio();
+          //Ventana emergente para mostrar el codigo, con un botón para aceptar y cerrar la ventana y la sesión
+          showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  title: Text("Código de acceso"),
+                  content: Text(code),
+                  actions: [
+                    TextButton(
+                      onPressed: () {
+                        // cerrar ventana emergente, sesión y volver a la pantalla de Home
+                        Navigator.of(context).pop();
+                        signOut(context);
+                      },
+                      child: Text("Aceptar"),
+                    ),
+                  ],
+                );
+              });
+          // guardar actividad en la base de datos
+          addActivity(code, 'pendon');
+        },
         child: Text(
           "Pendón",
           textAlign: TextAlign.center,
@@ -194,7 +218,7 @@ class _ThemeSelectionState extends State<ThemeSelection> {
   }
 
   // funcion para añadir la actividad en la base de datos
-  Future<void> addActivity(String code) async {
+  Future<void> addActivity(String code, String activityName) async {
     // Comprobar si existe una actividad con el mismo código
     final activityRef =
         FirebaseFirestore.instance.collection("activities").doc(code);
@@ -208,7 +232,7 @@ class _ThemeSelectionState extends State<ThemeSelection> {
     // Insertar la nueva actividad en la base de datos
     await activityRef.set({
       "code": code,
-      "questions": "renubero",
+      "questions": activityName,
       "teacher": loggedInUser.email,
     });
   }

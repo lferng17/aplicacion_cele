@@ -1,4 +1,3 @@
-import 'package:aplicacion_cele/screens/questions/renubero/question_03.dart';
 import 'package:flutter/material.dart';
 
 class Question02 extends StatefulWidget {
@@ -9,124 +8,150 @@ class Question02 extends StatefulWidget {
 }
 
 class _Question02State extends State<Question02> {
-  //Etiquetas
-  String etiqueta1 = 'Provoca chaparrones inoportunos';
-  String etiqueta2 = 'Llena de agua ríos y pantanos';
-  String etiqueta3 = 'Domina las lluvias y las tempestades';
-  String etiqueta4 = 'Provoca terribles tormentas que hacen que se vaya la luz';
-  String etiqueta5 = 'Proporciona lluvias cálidas de primaavera que riegan los campos';
-  String etiqueta6 = 'Es un personaje malhumorado, refunfuñón y cabezota';
-  String etiqueta7 = 'Oscurece el cielo con nubarrones negros';
-  String etiqueta8 = 'Le gusta aguar la fiesta a los humanos';
-  String etiqueta9 = 'Le gustan los árboles y, en general, cuida de la naturaleza';
-  String etiqueta10 = 'Llena los ríos de agua para que los animales puedan beber';
 
+  // Etiquetas
+  List<String> etiquetas = [
+    'Provoca chaparrones inoportunos',
+    'Llena de agua ríos y pantanos',
+    'Domina las lluvias y las tempestades',
+    'Provoca terribles tormentas que hacen que se vaya la luz',
+    'Proporciona lluvias cálidas de primavera que riegan los campos',
+    'Es un personaje malhumorado, refunfuñón y cabezota',
+    'Oscurece el cielo con nubarrones negros',
+    'Le gusta aguar la fiesta a los humanos',
+    'Le gustan los árboles y, en general, cuida de la naturaleza',
+    'Llena los ríos de agua para que los animales puedan beber',
+  ];
 
+  List<String> etiquetasAceptadasTop = [];
+  List<String> etiquetasAceptadasBottom = [];
 
-  //bool
-  bool insideBueno = false;
-  bool insideMalo = false;
-
-  String active = '';
+  int currentEtiquetaIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('B? ' + insideBueno.toString()),
+        title: Text('Pregunta 2'),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            DragTarget<String>(
-              builder: (context, data, rejectedDate){
-                return Container(
-                  width: 200.0,
-                  height: 200.0,
-                  color: Colors.blue,
-                  child: active == '' ? null: Etiquetas(etiqueta1),
-                );
-              },
-              onAccept: (etiqueta1){
-                setState(() {
-                  insideBueno = true;
-                  active = etiqueta1;
-                });
-              } ,
-            ),
-            Wrap(
-              spacing: 10.0,
-              children: [
-                Etiquetas(etiqueta1),
-                Etiquetas(etiqueta2),
-                Etiquetas(etiqueta3),
-              
-              ],
-            ),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                setState(() {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => Question03(),
-                    ),
-                  );
-                });
-              },
-              child: Text('Siguiente'),
-            ),
+            _buildDragTargetTop(),
+            _buildDraggable(),
+            _buildDragTargetBottom(),
           ],
         ),
       ),
     );
   }
-}
 
+  Widget _buildDraggable() {
+    return Draggable<String>(
+      data: etiquetas[currentEtiquetaIndex],
+      child: Container(
+        color: Colors.orange,
+        width: 200,
+        height: 200,
+        child: Center(
+          child: Text(
+            etiquetas[currentEtiquetaIndex],
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ),
+      ),
+      feedback: Container(
+        color: Colors.orange,
+        width: 200,
+        height: 200,
+        child: Center(
+          child: Text(
+            etiquetas[currentEtiquetaIndex],
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ),
+      ),
+      childWhenDragging: Container(
+        color: Colors.red,
+        width: 200,
+        height: 200,
+      ),
+    );
+  }
 
-class Etiquetas extends StatelessWidget {
-  final String EtiquetaString;
-
-  Etiquetas(this.EtiquetaString);
-
-  @override
-  Widget build(BuildContext context) {
-    return Draggable(
-              data: EtiquetaString,
-              child: Container(
-                height: 50,
-                width: 180,
-                child: Center(
-                  child: Text(
-                    EtiquetaString,
-                    style: TextStyle(fontSize: 18, color: Colors.black),
-                  ),
+  Widget _buildDragTargetTop() {
+    return DragTarget<String>(
+      onAccept: (data) => setState(() {
+        etiquetasAceptadasTop.add(data);
+        currentEtiquetaIndex++;
+      }),
+      builder: (context, candidateData, rejectedData) => Container(
+        color: Colors.blue,
+        width: 200,
+        height: 200,
+        child: Align(
+          alignment: Alignment.center,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                etiquetasAceptadasTop.join('\n'),
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
-              feedback: Material(
-                child: Container(
-                  height: 50,
-                  width: 180,
-                  child: Center(
-                    child: Text(
-                      EtiquetaString,
-                      style: TextStyle(fontSize: 18, color: Colors.yellow),
-                    ),
-                  ),
+            ],
+          ),
+        ),
+      ),
+      onWillAccept: (data) {
+        // Verificar si el dragtarget acepta la etiqueta
+        return [1, 2, 4, 8, 9].contains(etiquetas.indexOf(data!));
+      },
+    );
+  }
+
+  Widget _buildDragTargetBottom() {
+    return DragTarget<String>(
+      onAccept: (data) => setState(() {
+        etiquetasAceptadasBottom.add(data);
+        currentEtiquetaIndex++;
+      }),
+      builder: (context, candidateData, rejectedData) => Container(
+        color: Colors.green,
+        width: 200,
+        height: 200,
+        child: Align(
+          alignment: Alignment.center,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                etiquetasAceptadasBottom.join('\n'),
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
-              childWhenDragging: Container(
-                height: 50,
-                width: 180,
-                child: Center(
-                  child: Text(
-                    EtiquetaString,
-                    style: TextStyle(fontSize: 18, color: Colors.grey),
-                  ),
-                ),
-              ),
-            );
+            ],
+          ),
+        ),
+      ),
+      onWillAccept: (data) {
+        return [0, 3, 5, 6, 7].contains(etiquetas.indexOf(data!));
+      },
+    );
   }
 }

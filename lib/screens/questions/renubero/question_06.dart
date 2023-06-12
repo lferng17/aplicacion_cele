@@ -22,23 +22,18 @@ class _Question06State extends State<Question06> {
   // Choices for game
   final Map choices = {
     'Roble': {
-      'color': Colors.green,
       'text': 'Carbayu',
     },
     'Laurel': {
-      'color': Colors.yellow,
       'text': 'Llaurer',
     },
     'Hayedo': {
-      'color': Colors.red,
       'text': 'Faedo',
     },
     'Abedul': {
-      'color': Colors.purple,
       'text': 'Bedul',
     },
     'Avellano': {
-      'color': Colors.brown,
       'text': 'Ablanu',
     },
   };

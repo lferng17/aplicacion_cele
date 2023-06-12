@@ -1,8 +1,8 @@
 import 'dart:ffi';
 
 import 'package:aplicacion_cele/screens/home.dart';
-import 'package:aplicacion_cele/screens/questions/question_01.dart';
-import 'package:aplicacion_cele/screens/questions/question_02.dart';
+import 'package:aplicacion_cele/screens/questions/pendones/question_01.dart';
+import 'package:aplicacion_cele/screens/questions/renubero/question_01.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -78,7 +78,6 @@ class _WaitingPageState extends State<WaitingPage> {
     setState(() {
       currentActivity = ActivityModel.fromMap(activitySnapshot.data());
     });
-    print("currentActivity: " + currentActivity.code.toString());
     if (currentActivity.questions != "") {
       // Redirige a la clase correspondiente según el tema de la pregunta
       String questionClassName = currentActivity.questions.toString();
@@ -100,7 +99,7 @@ Widget getQuestionClass(String questionClassName) {
     case "renubero":
       return Question01();
     case "pendon":
-      return Question02();
+      return Question01Pendon();
     default:
       return Home();
   }
