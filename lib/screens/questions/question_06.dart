@@ -14,6 +14,10 @@ class _Question06State extends State<Question06> {
   final Map<String, bool> score = {};
   // Random seed
   int seed = Random().nextInt(100);
+  //Question
+  String question = 'Une el nombre de estos árboles o \n'
+      'conjunto de árboles en castellano\n'
+      'con su correspondiente en leonés:';
 
   // Choices for game
   final Map choices = {
@@ -47,46 +51,137 @@ class _Question06State extends State<Question06> {
         centerTitle: true,
         backgroundColor: Colors.green[600],
       ),
-      body: SingleChildScrollView(
-        child: Container(
-          constraints:
-              BoxConstraints(maxWidth: MediaQuery.of(context).size.width),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Flexible(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: choices.keys.map((opcion) {
-                    return Column(
-                      children: [
-                        _buildDraggable(opcion),
+      body: Container(
+        width: double.infinity,
+        decoration: BoxDecoration(
+            gradient: LinearGradient(begin: Alignment.topCenter, colors: [
+          Colors.green[600]!,
+          Colors.green[300]!,
+          Colors.green[200]!
+        ])),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            SizedBox(
+              height: 20,
+            ),
+            Padding(
+              padding: EdgeInsets.all(20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Center(
+                    child: Text(
+                      question,
+                      style: TextStyle(color: Colors.white, fontSize: 20),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: 1),
+            Expanded(
+              child: Container(
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(60),
+                        topRight: Radius.circular(60))),
+                child: SingleChildScrollView(
+                  child: Padding(
+                    padding: EdgeInsets.all(30),
+                    child: Column(
+                      children: <Widget>[
                         SizedBox(
-                            height: 5), 
+                          height: 30,
+                        ),
+                        Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Flexible(
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  children: choices.keys.map((opcion) {
+                                    return Column(
+                                      children: [
+                                        _buildDraggable(opcion),
+                                        SizedBox(height: 5),
+                                      ],
+                                    );
+                                  }).toList(),
+                                ),
+                              ),
+                              Flexible(
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: choices.keys.map((opcion) {
+                                    return Column(
+                                      children: [
+                                        _buildDragTarget(opcion),
+                                        SizedBox(height: 5),
+                                      ],
+                                    );
+                                  }).toList()
+                                    ..shuffle(Random(seed)),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          height: 40,
+                        ),
+                        SizedBox(
+                          height: 40,
+                        ),
+                        Container(
+                          height: 50,
+                          width: 130,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(50),
+                              color: Colors.green[600]!),
+                          child: MaterialButton(
+                            onPressed: () {
+                              setState(() {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => Question06(),
+                                  ),
+                                );
+                              });
+                            },
+                            child: Text(
+                              "Siguiente",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16.0,
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
-                    );
-                  }).toList(),
+                    ),
+                  ),
                 ),
               ),
-              Flexible(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: choices.keys.map((opcion) {
-                    return Column(
-                      children: [
-                        _buildDragTarget(opcion),
-                        SizedBox(height: 5),
-                      ],
-                    );
-                  }).toList()
-                    ..shuffle(Random(seed)),
-                ),
-              ),
-            ],
-          ),
+            )
+          ],
         ),
       ),
     );
@@ -110,7 +205,16 @@ class _Question06State extends State<Question06> {
       child: Container(
         alignment: Alignment.center,
         height: 50,
+        width: 140,
         padding: EdgeInsets.all(10),
+        decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(10),
+              border: Border.all(
+                color: Colors.green[600]!,
+                width: 1.5,
+              ),
+            ),
         child: Text(
           score[opcion] == true ? '✅' : opcion,
           style: TextStyle(color: Colors.black, fontSize: 20),
@@ -134,13 +238,13 @@ class _Question06State extends State<Question06> {
               ),
             ),
             height: 50,
-            width: 200,
+            width: 160,
             child: Center(
               child: Text(
-                '¡Correcto!',
+                '✅',
                 style: TextStyle(
                   color: Colors.black,
-                  fontSize: 16,
+                  fontSize: 20,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -157,7 +261,7 @@ class _Question06State extends State<Question06> {
               ),
             ),
             height: 50,
-            width: 200,
+            width: 160,
             child: Center(
               child: Text(
                 choices[opcion]['text'],
