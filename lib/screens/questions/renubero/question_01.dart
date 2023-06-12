@@ -1,40 +1,59 @@
-import 'package:aplicacion_cele/screens/questions/question_05.dart';
+import 'package:aplicacion_cele/screens/questions/renubero/question_02.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import '../../models/student_model.dart';
+import '../../../models/student_model.dart';
 
-class Question04 extends StatefulWidget {
-  const Question04({Key? key}) : super(key: key);
+class Question01 extends StatefulWidget {
+  const Question01({Key? key}) : super(key: key);
 
   @override
-  _Question04State createState() => _Question04State();
+  _Question01State createState() => _Question01State();
 }
 
-class _Question04State extends State<Question04> {
+class _Question01State extends State<Question01> {
   // user
   StudentModel loggedInStudent = StudentModel();
   // Pregunta
-  String question = 'El Reñubero es...';
+  String question = 'A Reñubero también le llaman...';
   // Respuestas
-  String res1 = 'Una persona que vive en algún pueblo de León';
-  String res2 = 'Un personaje joven y alegre que vive en las nubes';
-  String res3 =
-      'Un personaje anciano, poderoso y malhumorado que vive en las nubes';
-  String res4 = 'Un personaje anciano, alegre y poderoso que vive en las nubes';
-  String res5 =
-      'Una persona anciana, poderosa y malhumorada que vive en la montaña de León';
+  String renubon = 'Renubón';
+  String nubero = 'Nubero';
+  String renubero = 'Renubero';
+  String nubarron = 'Nubarrón';
+  String rinobero = 'Riñobero';
+  String renueva = 'Renueva';
 
   List<String> selectedAnswers = [];
-  List<String> correctAnswers = ['Un personaje anciano, poderoso y malhumorado que vive en las nubes'];
+  List<String> correctAnswers = ['Nubero', 'Renubero', 'Riñobero'];
   bool showResults = false;
   bool isCorrectionEnabled =
       true; //Variable para bloquear las respuestas despues de corregir
 
   @override
+  void initState() {
+    super.initState();
+    final User? currentUser = FirebaseAuth.instance.currentUser;
+    if (currentUser != null) {
+      FirebaseFirestore.instance
+          .collection('students')
+          .doc(currentUser.email)
+          .get()
+          .then((value) {
+        setState(() {
+          loggedInStudent = StudentModel.fromMap(value.data());
+        });
+      });
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Pregunta 4'),
+        title: Text('Pregunta 01/06'),
+        centerTitle: true,
         backgroundColor: Colors.green[600],
       ),
       body: Container(
@@ -56,9 +75,11 @@ class _Question04State extends State<Question04> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text(
-                    question,
-                    style: TextStyle(color: Colors.white, fontSize: 22),
+                  Center(
+                    child: Text(
+                      question,
+                      style: TextStyle(color: Colors.white, fontSize: 22),
+                    ),
                   ),
                   SizedBox(
                     height: 10,
@@ -72,7 +93,7 @@ class _Question04State extends State<Question04> {
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(60),
+                        topLeft: const Radius.circular(60),
                         topRight: Radius.circular(60))),
                 child: SingleChildScrollView(
                   child: Padding(
@@ -89,11 +110,12 @@ class _Question04State extends State<Question04> {
                           ),
                           child: Column(
                             children: <Widget>[
-                              buildAnswerOption(res1),
-                              buildAnswerOption(res2),
-                              buildAnswerOption(res3),
-                              buildAnswerOption(res4),
-                              buildAnswerOption(res5),
+                              buildAnswerOption(renubon),
+                              buildAnswerOption(nubero),
+                              buildAnswerOption(renubero),
+                              buildAnswerOption(nubarron),
+                              buildAnswerOption(rinobero),
+                              buildAnswerOption(renueva),
                             ],
                           ),
                         ),
@@ -139,7 +161,7 @@ class _Question04State extends State<Question04> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => Question05(),
+                                    builder: (context) => Question02(),
                                   ),
                                 );
                               });
@@ -228,12 +250,9 @@ class _Question04State extends State<Question04> {
                   color: borderColor,
                 ),
                 SizedBox(width: 8.0),
-                Expanded(
-                  child: Text(
-                    answer,
-                    maxLines: null,
-                    style: TextStyle(color: Colors.black),
-                  ),
+                Text(
+                  answer,
+                  style: TextStyle(color: Colors.black),
                 ),
               ],
             ),

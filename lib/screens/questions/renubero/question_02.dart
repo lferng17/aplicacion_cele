@@ -1,4 +1,4 @@
-import 'package:aplicacion_cele/screens/questions/question_03.dart';
+import 'package:aplicacion_cele/screens/questions/renubero/question_03.dart';
 import 'package:flutter/material.dart';
 
 class Question02 extends StatefulWidget {

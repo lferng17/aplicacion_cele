@@ -1,7 +1,7 @@
-import 'package:aplicacion_cele/screens/questions/question_06.dart';
+import 'package:aplicacion_cele/screens/questions/renubero/question_06.dart';
 import 'package:flutter/material.dart';
 
-import '../../models/student_model.dart';
+import '../../../models/student_model.dart';
 
 class Question05 extends StatefulWidget {
   const Question05({Key? key}) : super(key: key);

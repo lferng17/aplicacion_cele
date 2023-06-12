@@ -1,58 +1,40 @@
-import 'package:aplicacion_cele/screens/questions/question_02.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:aplicacion_cele/screens/questions/renubero/question_05.dart';
 import 'package:flutter/material.dart';
 
-import '../../models/student_model.dart';
+import '../../../models/student_model.dart';
 
-class Question01 extends StatefulWidget {
-  const Question01({Key? key}) : super(key: key);
+class Question04 extends StatefulWidget {
+  const Question04({Key? key}) : super(key: key);
 
   @override
-  _Question01State createState() => _Question01State();
+  _Question04State createState() => _Question04State();
 }
 
-class _Question01State extends State<Question01> {
+class _Question04State extends State<Question04> {
   // user
   StudentModel loggedInStudent = StudentModel();
   // Pregunta
-  String question = 'A Reñubero también le llaman...';
+  String question = 'El Reñubero es...';
   // Respuestas
-  String renubon = 'Renubón';
-  String nubero = 'Nubero';
-  String renubero = 'Renubero';
-  String nubarron = 'Nubarrón';
-  String rinobero = 'Riñobero';
-  String renueva = 'Renueva';
+  String res1 = 'Una persona que vive en algún pueblo de León';
+  String res2 = 'Un personaje joven y alegre que vive en las nubes';
+  String res3 =
+      'Un personaje anciano, poderoso y malhumorado que vive en las nubes';
+  String res4 = 'Un personaje anciano, alegre y poderoso que vive en las nubes';
+  String res5 =
+      'Una persona anciana, poderosa y malhumorada que vive en la montaña de León';
 
   List<String> selectedAnswers = [];
-  List<String> correctAnswers = ['Nubero', 'Renubero', 'Riñobero'];
+  List<String> correctAnswers = ['Un personaje anciano, poderoso y malhumorado que vive en las nubes'];
   bool showResults = false;
   bool isCorrectionEnabled =
       true; //Variable para bloquear las respuestas despues de corregir
 
   @override
-  void initState() {
-    super.initState();
-    final User? currentUser = FirebaseAuth.instance.currentUser;
-    if (currentUser != null) {
-      FirebaseFirestore.instance
-          .collection('students')
-          .doc(currentUser.email)
-          .get()
-          .then((value) {
-        setState(() {
-          loggedInStudent = StudentModel.fromMap(value.data());
-        });
-      });
-    }
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Pregunta 01/06'),
+        title: Text('Pregunta 4'),
         centerTitle: true,
         backgroundColor: Colors.green[600],
       ),
@@ -93,7 +75,7 @@ class _Question01State extends State<Question01> {
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.only(
-                        topLeft: const Radius.circular(60),
+                        topLeft: Radius.circular(60),
                         topRight: Radius.circular(60))),
                 child: SingleChildScrollView(
                   child: Padding(
@@ -110,12 +92,11 @@ class _Question01State extends State<Question01> {
                           ),
                           child: Column(
                             children: <Widget>[
-                              buildAnswerOption(renubon),
-                              buildAnswerOption(nubero),
-                              buildAnswerOption(renubero),
-                              buildAnswerOption(nubarron),
-                              buildAnswerOption(rinobero),
-                              buildAnswerOption(renueva),
+                              buildAnswerOption(res1),
+                              buildAnswerOption(res2),
+                              buildAnswerOption(res3),
+                              buildAnswerOption(res4),
+                              buildAnswerOption(res5),
                             ],
                           ),
                         ),
@@ -161,7 +142,7 @@ class _Question01State extends State<Question01> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => Question02(),
+                                    builder: (context) => Question05(),
                                   ),
                                 );
                               });
@@ -250,9 +231,12 @@ class _Question01State extends State<Question01> {
                   color: borderColor,
                 ),
                 SizedBox(width: 8.0),
-                Text(
-                  answer,
-                  style: TextStyle(color: Colors.black),
+                Expanded(
+                  child: Text(
+                    answer,
+                    maxLines: null,
+                    style: TextStyle(color: Colors.black),
+                  ),
                 ),
               ],
             ),
