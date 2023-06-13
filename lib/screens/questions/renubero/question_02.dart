@@ -1,3 +1,4 @@
+import 'package:aplicacion_cele/screens/questions/renubero/question_03.dart';
 import 'package:flutter/material.dart';
 
 class Question02 extends StatefulWidget {
@@ -8,19 +9,22 @@ class Question02 extends StatefulWidget {
 }
 
 class _Question02State extends State<Question02> {
+  // Pregunta
+  String question = 'Coloca cada etiqueta en el \nrecipiente correspondiente:';
 
   // Etiquetas
   List<String> etiquetas = [
-    'Provoca chaparrones inoportunos',
-    'Llena de agua ríos y pantanos',
-    'Domina las lluvias y las tempestades',
-    'Provoca terribles tormentas que hacen que se vaya la luz',
-    'Proporciona lluvias cálidas de primavera que riegan los campos',
-    'Es un personaje malhumorado, refunfuñón y cabezota',
-    'Oscurece el cielo con nubarrones negros',
-    'Le gusta aguar la fiesta a los humanos',
-    'Le gustan los árboles y, en general, cuida de la naturaleza',
-    'Llena los ríos de agua para que los animales puedan beber',
+    'Provoca chaparrones inoportunos.',
+    'Llena de agua ríos y pantanos.',
+    'Domina las lluvias y las tempestades.',
+    'Provoca terribles tormentas que\nhacen que se vaya la luz.',
+    'Proporciona lluvias cálidas de\nprimavera que riegan los campos.',
+    'Es un personaje malhumorado,\nrefunfuñón y cabezota.',
+    'Oscurece el cielo con nubarrones\nnegros.',
+    'Le gusta aguar la fiesta a los humanos.',
+    'Le gustan los árboles y, en general,\ncuida de la naturaleza.',
+    'Llena los ríos de agua para que los\nanimales puedan beber.',
+    '✅ ¡Genial! ✅'
   ];
 
   List<String> etiquetasAceptadasTop = [];
@@ -32,15 +36,154 @@ class _Question02State extends State<Question02> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Pregunta 2'),
+        title: const Text('Pregunta 02/06'),
+        centerTitle: true,
+        backgroundColor: Colors.green[600],
       ),
-      body: Center(
+      body: Container(
+        width: double.infinity,
+        decoration: BoxDecoration(
+            gradient: LinearGradient(begin: Alignment.topCenter, colors: [
+          Colors.green[600]!,
+          Colors.green[400]!,
+          Colors.green[200]!
+        ])),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            _buildDragTargetTop(),
-            _buildDraggable(),
-            _buildDragTargetBottom(),
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            const SizedBox(
+              height: 20,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(20),
+              child: Column(
+                children: <Widget>[
+                  Center(
+                    child: Text(
+                      question,
+                      style: const TextStyle(color: Colors.white, fontSize: 22),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+              child: Container(
+                decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(60),
+                        topRight: Radius.circular(60))),
+                child: SingleChildScrollView(
+                  child: Padding(
+                    padding: const EdgeInsets.all(30),
+                    child: Column(
+                      children: <Widget>[
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        Container(
+                          decoration: BoxDecoration(
+                            color: Colors.transparent,
+                            borderRadius: BorderRadius.circular(80),
+                          ),
+                          child: Column(
+                            children: <Widget>[
+                              Center(
+                                child: Container(
+                                  width: 350,
+                                  height: 40,
+                                  decoration: BoxDecoration(
+                                    borderRadius: const BorderRadius.only(
+                                      topLeft: Radius.circular(20),
+                                      topRight: Radius.circular(20),
+                                    ),
+                                    color: Colors.green[400],
+                                  ),
+                                  child: const Center(
+                                    child: Text(
+                                      'Cosas Buenas del Reñubero',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              _buildDragTargetTop(),
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              _buildDraggable(),
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              Center(
+                                child: Container(
+                                  width: 350,
+                                  height: 40,
+                                  decoration: BoxDecoration(
+                                    borderRadius: const BorderRadius.only(
+                                      topLeft: Radius.circular(20),
+                                      topRight: Radius.circular(20),
+                                    ),
+                                    color: Colors.red[300],
+                                  ),
+                                  child: const Center(
+                                    child: Text(
+                                      'Cosas Malas del Reñubero',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              _buildDragTargetBottom(),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 40,
+                        ),
+                        Container(
+                          height: 50,
+                          width: 130,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(50),
+                              color: Colors.green[600]!),
+                          child: MaterialButton(
+                            onPressed: () {
+                              setState(() {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => Question03(),
+                                  ),
+                                );
+                              });
+                            },
+                            child: const Text(
+                              "Siguiente",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16.0,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            )
           ],
         ),
       ),
@@ -50,42 +193,53 @@ class _Question02State extends State<Question02> {
   Widget _buildDraggable() {
     return Draggable<String>(
       data: etiquetas[currentEtiquetaIndex],
-      child: Container(
-        color: Colors.orange,
-        width: 200,
-        height: 200,
-        child: Center(
-          child: Text(
-            etiquetas[currentEtiquetaIndex],
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          color: Colors.lightBlue[500],
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Container(
+          width: 310,
+          height: 60,
+          child: Center(
+            child: Text(
+              etiquetas[currentEtiquetaIndex],
+              style: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+              textAlign: TextAlign.center,
             ),
-            textAlign: TextAlign.center,
           ),
         ),
       ),
-      feedback: Container(
-        color: Colors.orange,
-        width: 200,
-        height: 200,
-        child: Center(
-          child: Text(
-            etiquetas[currentEtiquetaIndex],
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
+      feedback: DecoratedBox(
+        decoration: BoxDecoration(
+          color: Colors.lightBlue[400],
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Container(
+          width: 300,
+          height: 60,
+          child: Center(
+            child: Text(
+              etiquetas[currentEtiquetaIndex],
+              style: const TextStyle(
+                fontSize: 14,
+                color: Colors.white,
+                decoration: TextDecoration.none,
+                fontWeight: FontWeight.bold,
+              ),
+              textAlign: TextAlign.center,
             ),
-            textAlign: TextAlign.center,
           ),
         ),
       ),
       childWhenDragging: Container(
-        color: Colors.red,
-        width: 200,
-        height: 200,
+        color: Colors.white,
+        width: 300,
+        height: 60,
       ),
     );
   }
@@ -93,26 +247,36 @@ class _Question02State extends State<Question02> {
   Widget _buildDragTargetTop() {
     return DragTarget<String>(
       onAccept: (data) => setState(() {
-        etiquetasAceptadasTop.add(data);
         currentEtiquetaIndex++;
+        etiquetasAceptadasTop.add(data);
       }),
       builder: (context, candidateData, rejectedData) => Container(
-        color: Colors.blue,
-        width: 200,
+        width: 350,
         height: 200,
+        decoration: BoxDecoration(
+          borderRadius: const BorderRadius.only(
+              bottomLeft: Radius.circular(20),
+              bottomRight: Radius.circular(20)),
+          color: Colors.green[400],
+        ),
         child: Align(
           alignment: Alignment.center,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                etiquetasAceptadasTop.join('\n'),
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
+          child: ListView.separated(
+            padding: const EdgeInsets.all(6),
+            itemCount: etiquetasAceptadasTop.length,
+            separatorBuilder: (BuildContext context, int index) =>
+                const SizedBox(height: 5),
+            itemBuilder: (BuildContext context, int index) {
+              return Center(
+                child: Text(
+                  etiquetasAceptadasTop[index],
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              ),
-            ],
+              );
+            },
           ),
         ),
       ),
@@ -126,26 +290,36 @@ class _Question02State extends State<Question02> {
   Widget _buildDragTargetBottom() {
     return DragTarget<String>(
       onAccept: (data) => setState(() {
-        etiquetasAceptadasBottom.add(data);
         currentEtiquetaIndex++;
+        etiquetasAceptadasBottom.add(data);
       }),
       builder: (context, candidateData, rejectedData) => Container(
-        color: Colors.green,
-        width: 200,
+        width: 350,
         height: 200,
+        decoration: BoxDecoration(
+          borderRadius: const BorderRadius.only(
+              bottomLeft: Radius.circular(20),
+              bottomRight: Radius.circular(20)),
+          color: Colors.red[300],
+        ),
         child: Align(
           alignment: Alignment.center,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                etiquetasAceptadasBottom.join('\n'),
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
+          child: ListView.separated(
+            padding: const EdgeInsets.all(6),
+            itemCount: etiquetasAceptadasBottom.length,
+            separatorBuilder: (BuildContext context, int index) =>
+                const SizedBox(height: 5),
+            itemBuilder: (BuildContext context, int index) {
+              return Center(
+                child: Text(
+                  etiquetasAceptadasBottom[index],
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              ),
-            ],
+              );
+            },
           ),
         ),
       ),
