@@ -1,8 +1,6 @@
 import 'package:aplicacion_cele/screens/questions/renubero/question_05.dart';
 import 'package:flutter/material.dart';
 
-import '../../../models/student_model.dart';
-
 class Question04 extends StatefulWidget {
   const Question04({Key? key}) : super(key: key);
 
@@ -11,30 +9,34 @@ class Question04 extends StatefulWidget {
 }
 
 class _Question04State extends State<Question04> {
-  // user
-  StudentModel loggedInStudent = StudentModel();
   // Pregunta
-  String question = 'El Reñubero es...';
-  // Respuestas
-  String res1 = 'Una persona que vive en algún pueblo de León';
-  String res2 = 'Un personaje joven y alegre que vive en las nubes';
-  String res3 =
-      'Un personaje anciano, poderoso y malhumorado que vive en las nubes';
-  String res4 = 'Un personaje anciano, alegre y poderoso que vive en las nubes';
-  String res5 =
-      'Una persona anciana, poderosa y malhumorada que vive en la montaña de León';
+  String question = 'Coloca cada etiqueta en el \nrecipiente correspondiente:';
 
-  List<String> selectedAnswers = [];
-  List<String> correctAnswers = ['Un personaje anciano, poderoso y malhumorado que vive en las nubes'];
-  bool showResults = false;
-  bool isCorrectionEnabled =
-      true; //Variable para bloquear las respuestas despues de corregir
+  // Etiquetas
+  List<String> etiquetas = [
+    'Provoca chaparrones inoportunos.',
+    'Llena de agua ríos y pantanos.',
+    'Domina las lluvias y las tempestades.',
+    'Provoca terribles tormentas que\nhacen que se vaya la luz.',
+    'Proporciona lluvias cálidas de\nprimavera que riegan los campos.',
+    'Es un personaje malhumorado,\nrefunfuñón y cabezota.',
+    'Oscurece el cielo con nubarrones\nnegros.',
+    'Le gusta aguar la fiesta a los humanos.',
+    'Le gustan los árboles y, en general,\ncuida de la naturaleza.',
+    'Llena los ríos de agua para que los\nanimales puedan beber.',
+    '✅ ¡Genial! ✅'
+  ];
+
+  List<String> etiquetasAceptadasTop = [];
+  List<String> etiquetasAceptadasBottom = [];
+
+  int currentEtiquetaIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Pregunta 4'),
+        title: const Text('Pregunta 04/06'),
         centerTitle: true,
         backgroundColor: Colors.green[600],
       ),
@@ -49,85 +51,103 @@ class _Question04State extends State<Question04> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Padding(
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Center(
                     child: Text(
                       question,
-                      style: TextStyle(color: Colors.white, fontSize: 22),
+                      style: const TextStyle(color: Colors.white, fontSize: 22),
                     ),
-                  ),
-                  SizedBox(
-                    height: 10,
                   ),
                 ],
               ),
             ),
-            SizedBox(height: 10),
             Expanded(
               child: Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(60),
                         topRight: Radius.circular(60))),
                 child: SingleChildScrollView(
                   child: Padding(
-                    padding: EdgeInsets.all(30),
+                    padding: const EdgeInsets.all(30),
                     child: Column(
                       children: <Widget>[
-                        SizedBox(
-                          height: 30,
+                        const SizedBox(
+                          height: 5,
                         ),
                         Container(
                           decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.transparent,
+                            borderRadius: BorderRadius.circular(80),
                           ),
                           child: Column(
                             children: <Widget>[
-                              buildAnswerOption(res1),
-                              buildAnswerOption(res2),
-                              buildAnswerOption(res3),
-                              buildAnswerOption(res4),
-                              buildAnswerOption(res5),
+                              Center(
+                                child: Container(
+                                  width: 350,
+                                  height: 40,
+                                  decoration: BoxDecoration(
+                                    borderRadius: const BorderRadius.only(
+                                      topLeft: Radius.circular(20),
+                                      topRight: Radius.circular(20),
+                                    ),
+                                    color: Colors.green[400],
+                                  ),
+                                  child: const Center(
+                                    child: Text(
+                                      'Cosas Buenas del Reñubero',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              _buildDragTargetTop(),
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              _buildDraggable(),
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              Center(
+                                child: Container(
+                                  width: 350,
+                                  height: 40,
+                                  decoration: BoxDecoration(
+                                    borderRadius: const BorderRadius.only(
+                                      topLeft: Radius.circular(20),
+                                      topRight: Radius.circular(20),
+                                    ),
+                                    color: Colors.red[300],
+                                  ),
+                                  child: const Center(
+                                    child: Text(
+                                      'Cosas Malas del Reñubero',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              _buildDragTargetBottom(),
                             ],
                           ),
                         ),
-                        SizedBox(
-                          height: 40,
-                        ),
-                        Container(
-                          width: 100,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(50),
-                              color: Colors.green[500]!),
-                          child: MaterialButton(
-                            onPressed: () {
-                              setState(() {
-                                showResults = true;
-                                isCorrectionEnabled =
-                                    false; //Bloquear respuestas
-                              });
-                            },
-                            child: Text(
-                              "Corregir",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 14.0,
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(
+                        const SizedBox(
                           height: 40,
                         ),
                         Container(
@@ -147,7 +167,7 @@ class _Question04State extends State<Question04> {
                                 );
                               });
                             },
-                            child: Text(
+                            child: const Text(
                               "Siguiente",
                               textAlign: TextAlign.center,
                               style: TextStyle(
@@ -170,79 +190,142 @@ class _Question04State extends State<Question04> {
     );
   }
 
-  Widget buildAnswerOption(String answer) {
-    bool isSelected = selectedAnswers.contains(answer);
-    bool isCorrect = correctAnswers.contains(answer);
-
-    Color borderColor;
-    Color backgroundColor;
-    IconData? iconData;
-
-    if (showResults) {
-      if (isSelected && isCorrect) {
-        borderColor = Colors.green;
-        backgroundColor = Colors.green[100]!;
-        iconData = Icons.check;
-      } else if (isSelected && !isCorrect) {
-        borderColor = Colors.red;
-        backgroundColor = Colors.red[100]!;
-        iconData = Icons.cancel;
-      } else if (!isSelected && isCorrect) {
-        borderColor = Colors.green;
-        backgroundColor = Colors.white;
-      } else {
-        borderColor = Colors.black26;
-        backgroundColor = Colors.white;
-      }
-    } else {
-      borderColor = isSelected ? Colors.green : Colors.black26;
-      backgroundColor = isSelected ? Colors.green[50]! : Colors.white;
-    }
-
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: 4.0),
-      child: Container(
+  Widget _buildDraggable() {
+    return Draggable<String>(
+      data: etiquetas[currentEtiquetaIndex],
+      child: DecoratedBox(
         decoration: BoxDecoration(
-          color: backgroundColor,
-          border: Border.all(
-            color: borderColor,
-            width: 2.0,
-          ),
-          borderRadius: BorderRadius.circular(10.0),
+          color: Colors.lightBlue[500],
+          borderRadius: BorderRadius.circular(10),
         ),
-        child: InkWell(
-          onTap: () {
-            if (isCorrectionEnabled) {
-              setState(() {
-                if (isSelected) {
-                  selectedAnswers.remove(answer);
-                } else {
-                  selectedAnswers.add(answer);
-                }
-              });
-            }
-          },
-          child: Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Row(
-              children: [
-                Icon(
-                  iconData,
-                  color: borderColor,
-                ),
-                SizedBox(width: 8.0),
-                Expanded(
-                  child: Text(
-                    answer,
-                    maxLines: null,
-                    style: TextStyle(color: Colors.black),
-                  ),
-                ),
-              ],
+        child: Container(
+          width: 310,
+          height: 60,
+          child: Center(
+            child: Text(
+              etiquetas[currentEtiquetaIndex],
+              style: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+              textAlign: TextAlign.center,
             ),
           ),
         ),
       ),
+      feedback: DecoratedBox(
+        decoration: BoxDecoration(
+          color: Colors.lightBlue[400],
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Container(
+          width: 300,
+          height: 60,
+          child: Center(
+            child: Text(
+              etiquetas[currentEtiquetaIndex],
+              style: const TextStyle(
+                fontSize: 14,
+                color: Colors.white,
+                decoration: TextDecoration.none,
+                fontWeight: FontWeight.bold,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ),
+        ),
+      ),
+      childWhenDragging: Container(
+        color: Colors.white,
+        width: 300,
+        height: 60,
+      ),
+    );
+  }
+
+  Widget _buildDragTargetTop() {
+    return DragTarget<String>(
+      onAccept: (data) => setState(() {
+        currentEtiquetaIndex++;
+        etiquetasAceptadasTop.add(data);
+      }),
+      builder: (context, candidateData, rejectedData) => Container(
+        width: 350,
+        height: 200,
+        decoration: BoxDecoration(
+          borderRadius: const BorderRadius.only(
+              bottomLeft: Radius.circular(20),
+              bottomRight: Radius.circular(20)),
+          color: Colors.green[400],
+        ),
+        child: Align(
+          alignment: Alignment.center,
+          child: ListView.separated(
+            padding: const EdgeInsets.all(6),
+            itemCount: etiquetasAceptadasTop.length,
+            separatorBuilder: (BuildContext context, int index) =>
+                const SizedBox(height: 5),
+            itemBuilder: (BuildContext context, int index) {
+              return Center(
+                child: Text(
+                  etiquetasAceptadasTop[index],
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              );
+            },
+          ),
+        ),
+      ),
+      onWillAccept: (data) {
+        // Verificar si el dragtarget acepta la etiqueta
+        return [1, 2, 4, 8, 9].contains(etiquetas.indexOf(data!));
+      },
+    );
+  }
+
+  Widget _buildDragTargetBottom() {
+    return DragTarget<String>(
+      onAccept: (data) => setState(() {
+        currentEtiquetaIndex++;
+        etiquetasAceptadasBottom.add(data);
+      }),
+      builder: (context, candidateData, rejectedData) => Container(
+        width: 350,
+        height: 200,
+        decoration: BoxDecoration(
+          borderRadius: const BorderRadius.only(
+              bottomLeft: Radius.circular(20),
+              bottomRight: Radius.circular(20)),
+          color: Colors.red[300],
+        ),
+        child: Align(
+          alignment: Alignment.center,
+          child: ListView.separated(
+            padding: const EdgeInsets.all(6),
+            itemCount: etiquetasAceptadasBottom.length,
+            separatorBuilder: (BuildContext context, int index) =>
+                const SizedBox(height: 5),
+            itemBuilder: (BuildContext context, int index) {
+              return Center(
+                child: Text(
+                  etiquetasAceptadasBottom[index],
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              );
+            },
+          ),
+        ),
+      ),
+      onWillAccept: (data) {
+        return [0, 3, 5, 6, 7].contains(etiquetas.indexOf(data!));
+      },
     );
   }
 }

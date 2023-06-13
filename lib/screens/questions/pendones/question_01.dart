@@ -1,4 +1,3 @@
-import 'package:aplicacion_cele/screens/questions/renubero/question_02.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';

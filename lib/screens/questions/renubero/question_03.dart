@@ -1,6 +1,8 @@
 import 'package:aplicacion_cele/screens/questions/renubero/question_04.dart';
 import 'package:flutter/material.dart';
 
+import '../../../models/student_model.dart';
+
 class Question03 extends StatefulWidget {
   const Question03({Key? key}) : super(key: key);
 
@@ -9,13 +11,24 @@ class Question03 extends StatefulWidget {
 }
 
 class _Question03State extends State<Question03> {
+  // user
+  StudentModel loggedInStudent = StudentModel();
   // Pregunta
-  String question =
-      '¿Qué podría exclamar un bombero cuando algo no le sale bien?\n'
-      'Piensa en dos versos que rimen, Como hace el Reñubero:\n'
-      '¡¡Rayos y centellas, luz de las estrellas!!';
+  String question = 'El Reñubero es...';
+  // Respuestas
+  String res1 = 'Una persona que vive en algún pueblo de León';
+  String res2 = 'Un personaje joven y alegre que vive en las nubes';
+  String res3 =
+      'Un personaje anciano, poderoso y malhumorado que vive en las nubes';
+  String res4 = 'Un personaje anciano, alegre y poderoso que vive en las nubes';
+  String res5 =
+      'Una persona anciana, poderosa y malhumorada que vive en la montaña de León';
 
-  int _currentStep = 0;
+  List<String> selectedAnswers = [];
+  List<String> correctAnswers = ['Un personaje anciano, poderoso y malhumorado que vive en las nubes'];
+  bool showResults = false;
+  bool isCorrectionEnabled =
+      true; //Variable para bloquear las respuestas despues de corregir
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +60,7 @@ class _Question03State extends State<Question03> {
                   Center(
                     child: Text(
                       question,
-                      style: TextStyle(color: Colors.white, fontSize: 18),
+                      style: TextStyle(color: Colors.white, fontSize: 22),
                     ),
                   ),
                   SizedBox(
@@ -56,7 +69,7 @@ class _Question03State extends State<Question03> {
                 ],
               ),
             ),
-            SizedBox(height: 1),
+            SizedBox(height: 10),
             Expanded(
               child: Container(
                 decoration: BoxDecoration(
@@ -78,81 +91,41 @@ class _Question03State extends State<Question03> {
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: Column(
-                            children: [
-                              SizedBox(height: 16),
-                              Stepper(
-                                steps: [
-                                  Step(
-                                      title: Text('Un bombero diría:'),
-                                      content: TextFormField(
-                                        decoration: InputDecoration(
-                                          hintText: 'Escribe aquí',
-                                        ),
-                                      )),
-                                  Step(
-                                      title: Text('¿Y un informático?'),
-                                      content: TextFormField(
-                                        decoration: InputDecoration(
-                                          hintText: 'Escribe aquí',
-                                        ),
-                                      )),
-                                  Step(
-                                      title: Text('¿Y un profesor?'),
-                                      content: TextFormField(
-                                        decoration: InputDecoration(
-                                          hintText: 'Escribe aquí',
-                                        ),
-                                      )),
-                                  Step(
-                                      title: Text('¿Y un estudiante?'),
-                                      content: TextFormField(
-                                        decoration: InputDecoration(
-                                          hintText: 'Escribe aquí',
-                                        ),
-                                      )),
-                                  Step(
-                                      title: Text('¿Y un policía?'),
-                                      content: TextFormField(
-                                        decoration: InputDecoration(
-                                          hintText: 'Escribe aquí',
-                                        ),
-                                      )),
-                                  Step(
-                                      title: Text('¿Y un carpintero?'),
-                                      content: TextFormField(
-                                        decoration: InputDecoration(
-                                          hintText: 'Escribe aquí',
-                                        ),
-                                      )),
-                                ],
-                                onStepTapped: (int newIndex) {
-                                  setState(() {
-                                    _currentStep = newIndex;
-                                  });
-                                },
-                                currentStep: _currentStep,
-                                onStepContinue: () {
-                                  setState(() {
-                                    if (_currentStep < 5) {
-                                      _currentStep++;
-                                    }
-                                  });
-                                },
-                                onStepCancel: () {
-                                  setState(() {
-                                    if (_currentStep != 0) {
-                                      setState(() {
-                                        _currentStep -= 1;
-                                      });
-                                    }
-                                  });
-                                },
-                              ),
+                            children: <Widget>[
+                              buildAnswerOption(res1),
+                              buildAnswerOption(res2),
+                              buildAnswerOption(res3),
+                              buildAnswerOption(res4),
+                              buildAnswerOption(res5),
                             ],
                           ),
                         ),
                         SizedBox(
                           height: 40,
+                        ),
+                        Container(
+                          width: 100,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(50),
+                              color: Colors.green[500]!),
+                          child: MaterialButton(
+                            onPressed: () {
+                              setState(() {
+                                showResults = true;
+                                isCorrectionEnabled =
+                                    false; //Bloquear respuestas
+                              });
+                            },
+                            child: Text(
+                              "Corregir",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 14.0,
+                              ),
+                            ),
+                          ),
                         ),
                         SizedBox(
                           height: 40,
@@ -192,6 +165,82 @@ class _Question03State extends State<Question03> {
               ),
             )
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget buildAnswerOption(String answer) {
+    bool isSelected = selectedAnswers.contains(answer);
+    bool isCorrect = correctAnswers.contains(answer);
+
+    Color borderColor;
+    Color backgroundColor;
+    IconData? iconData;
+
+    if (showResults) {
+      if (isSelected && isCorrect) {
+        borderColor = Colors.green;
+        backgroundColor = Colors.green[100]!;
+        iconData = Icons.check;
+      } else if (isSelected && !isCorrect) {
+        borderColor = Colors.red;
+        backgroundColor = Colors.red[100]!;
+        iconData = Icons.cancel;
+      } else if (!isSelected && isCorrect) {
+        borderColor = Colors.green;
+        backgroundColor = Colors.white;
+      } else {
+        borderColor = Colors.black26;
+        backgroundColor = Colors.white;
+      }
+    } else {
+      borderColor = isSelected ? Colors.green : Colors.black26;
+      backgroundColor = isSelected ? Colors.green[50]! : Colors.white;
+    }
+
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 4.0),
+      child: Container(
+        decoration: BoxDecoration(
+          color: backgroundColor,
+          border: Border.all(
+            color: borderColor,
+            width: 2.0,
+          ),
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        child: InkWell(
+          onTap: () {
+            if (isCorrectionEnabled) {
+              setState(() {
+                if (isSelected) {
+                  selectedAnswers.remove(answer);
+                } else {
+                  selectedAnswers.add(answer);
+                }
+              });
+            }
+          },
+          child: Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Row(
+              children: [
+                Icon(
+                  iconData,
+                  color: borderColor,
+                ),
+                SizedBox(width: 8.0),
+                Expanded(
+                  child: Text(
+                    answer,
+                    maxLines: null,
+                    style: TextStyle(color: Colors.black),
+                  ),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );
