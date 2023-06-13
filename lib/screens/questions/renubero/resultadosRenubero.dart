@@ -48,6 +48,14 @@ class _ResultadosRenuberoState extends State<ResultadosRenubero> {
           students.add(StudentModel.fromMap(data));
         }
       });
+
+      // Ordenar la lista de estudiantes por la variable 'points'
+      students.sort((a, b) {
+        var pointsA = int.tryParse(a.points ?? '0') ?? 0;
+        var pointsB = int.tryParse(b.points ?? '0') ?? 0;
+        return pointsB.compareTo(pointsA);
+      });
+
       setState(() {
         this.students = students;
       });
@@ -116,39 +124,5 @@ class _ResultadosRenuberoState extends State<ResultadosRenubero> {
       ),
     );
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Resultados Actividad ${loggedInStudent.activityCode}'),
-        centerTitle: true,
-        backgroundColor: Colors.green[600],
-      ),
-      body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        child: Column(
-          children: [
-            SizedBox(height: 20),
-            Text(
-              'Resultados de la actividad',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 20),
-            Expanded(
-              child: ListView.builder(
-                itemCount: students.length,
-                itemBuilder: (context, index) {
-                  return Card(
-                    child: ListTile(
-                      title: Text(students[index].alias!),
-                      subtitle: Text(students[index].activityCode!),
-                    ),
-                  );
-                },
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
   }
 }

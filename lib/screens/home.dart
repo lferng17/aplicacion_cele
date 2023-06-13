@@ -244,7 +244,7 @@ class _HomeState extends State<Home> {
     // writing all the values
     studentModel.alias = nameController.text;
     studentModel.activityCode = codeController.text;
-    studentModel.points = 0;
+    studentModel.points = "0";
     studentModel.inventedEmail = user!.email;
     studentModel.uid = user.uid;
 

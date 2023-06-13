@@ -282,9 +282,12 @@ class _Question01State extends State<Question01> {
     }
   }
     
-  
-  
-  loggedInStudent.points = loggedInStudent.points! + points; // Suma los puntos calculados a loggedInStudent.points en Firebase
+  //Castear loggedInStudent.points a int
+  int loggedInStudentPointsInt = int.parse(loggedInStudent.points!);
+
+  //Suma los puntos calculados a loggedInStudent.points en Firebase
+  loggedInStudent.points = (loggedInStudentPointsInt + points).toString();
+
   FirebaseFirestore.instance
       .collection('students')
       .doc(loggedInStudent.inventedEmail)
