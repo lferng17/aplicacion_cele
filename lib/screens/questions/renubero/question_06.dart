@@ -1,4 +1,4 @@
-import 'package:aplicacion_cele/screens/questions/renubero/question_06.dart';
+import 'package:aplicacion_cele/screens/questions/renubero/resultadosRenubero.dart';
 import 'package:flutter/material.dart';
 
 import '../../../models/student_model.dart';
@@ -134,7 +134,7 @@ class _Question06State extends State<Question06> {
                         Container(
                           decoration: BoxDecoration(
                             color: Colors.white,
-                            borderRadius: BorderRadius.circular(10),
+                            borderRadius: BorderRadius.circular(60),
                           ),
                           child: Column(
                             children: <Widget>[
@@ -493,7 +493,7 @@ class _Question06State extends State<Question06> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => Question06(),
+                                    builder: (context) => ResultadosRenubero(),
                                   ),
                                 );
                               });

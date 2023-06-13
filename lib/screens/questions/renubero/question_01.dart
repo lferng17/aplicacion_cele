@@ -31,6 +31,9 @@ class _Question01State extends State<Question01> {
   bool isCorrectionEnabled =
       true; //Variable para bloquear las respuestas despues de corregir
 
+  // Points
+  int points = 0;
+
   @override
   void initState() {
     super.initState();
@@ -133,6 +136,7 @@ class _Question01State extends State<Question01> {
                                 showResults = true;
                                 isCorrectionEnabled =
                                     false; //Bloquear respuestas
+                                calcularPuntos();
                               });
                             },
                             child: Text(
@@ -261,4 +265,31 @@ class _Question01State extends State<Question01> {
       ),
     );
   }
+
+
+  void calcularPuntos() {
+  points = 0;
+  
+  
+  for (int i = 0; i < selectedAnswers.length; i++) {
+    //+5 puntos por cada respuesta correcta
+    if (correctAnswers.contains(selectedAnswers[i])) {
+      points = points + 5;
+    }
+    //-2 puntos por cada respuesta incorrecta
+    else {
+      points = points - 2;
+    }
+  }
+    
+  
+  
+  loggedInStudent.points = loggedInStudent.points! + points; // Suma los puntos calculados a loggedInStudent.points en Firebase
+  FirebaseFirestore.instance
+      .collection('students')
+      .doc(loggedInStudent.inventedEmail)
+      .update({'points': loggedInStudent.points});
+}
+
+
 }

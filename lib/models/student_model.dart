@@ -1,7 +1,7 @@
 class StudentModel{
   String? alias;
   String? activityCode;
-  String? points;
+  int? points;
   String? uid;
   String? inventedEmail;
 
