@@ -1,5 +1,11 @@
+import 'dart:async';
+
 import 'package:aplicacion_cele/screens/questions/renubero/question_05.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
+import '../../../models/student_model.dart';
 
 class Question04 extends StatefulWidget {
   const Question04({Key? key}) : super(key: key);
@@ -9,6 +15,9 @@ class Question04 extends StatefulWidget {
 }
 
 class _Question04State extends State<Question04> {
+  // user
+  StudentModel loggedInStudent = StudentModel();
+
   // Pregunta
   String question = 'Coloca cada etiqueta en el \nrecipiente correspondiente:';
 
@@ -31,6 +40,34 @@ class _Question04State extends State<Question04> {
   List<String> etiquetasAceptadasBottom = [];
 
   int currentEtiquetaIndex = 0;
+
+  //Variables para desbloquear el botón
+  bool _isButtonDisabled = true;
+
+  //Puntos
+  int points = 30;
+  late Timer _timer; // Timer para el contador
+
+
+  @override
+  void initState() {
+    super.initState();
+    startTimer(); // Iniciar el contador al cargar la página
+    final User? currentUser = FirebaseAuth.instance.currentUser;
+    if (currentUser != null) {
+      FirebaseFirestore.instance
+          .collection('students')
+          .doc(currentUser.email)
+          .get()
+          .then((value) {
+        setState(() {
+          loggedInStudent = StudentModel.fromMap(value.data());
+        });
+      });
+    }
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -150,30 +187,37 @@ class _Question04State extends State<Question04> {
                         const SizedBox(
                           height: 40,
                         ),
-                        Container(
-                          height: 50,
-                          width: 130,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(50),
-                              color: Colors.green[600]!),
-                          child: MaterialButton(
-                            onPressed: () {
-                              setState(() {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => Question05(),
+                        IgnorePointer(
+                          ignoring: _isButtonDisabled,
+                          child: Opacity(
+                            opacity: _isButtonDisabled ? 0.5 : 1.0,
+                            child: Container(
+                              height: 50,
+                              width: 130,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(50),
+                                color: Colors.green[600]!,
+                              ),
+                              child: MaterialButton(
+                                onPressed: () {
+                                  setState(() {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => Question05(),
+                                      ),
+                                    );
+                                  });
+                                },
+                                child: const Text(
+                                  "Siguiente",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16.0,
                                   ),
-                                );
-                              });
-                            },
-                            child: const Text(
-                              "Siguiente",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16.0,
+                                ),
                               ),
                             ),
                           ),
@@ -249,10 +293,11 @@ class _Question04State extends State<Question04> {
       onAccept: (data) => setState(() {
         currentEtiquetaIndex++;
         etiquetasAceptadasTop.add(data);
+        desbloquearBoton();
       }),
       builder: (context, candidateData, rejectedData) => Container(
         width: 350,
-        height: 200,
+        height: 210,
         decoration: BoxDecoration(
           borderRadius: const BorderRadius.only(
               bottomLeft: Radius.circular(20),
@@ -292,10 +337,11 @@ class _Question04State extends State<Question04> {
       onAccept: (data) => setState(() {
         currentEtiquetaIndex++;
         etiquetasAceptadasBottom.add(data);
+        desbloquearBoton();
       }),
       builder: (context, candidateData, rejectedData) => Container(
         width: 350,
-        height: 200,
+        height: 210,
         decoration: BoxDecoration(
           borderRadius: const BorderRadius.only(
               bottomLeft: Radius.circular(20),
@@ -328,4 +374,46 @@ class _Question04State extends State<Question04> {
       },
     );
   }
+
+  void desbloquearBoton() {
+    if (currentEtiquetaIndex == 10) {
+      _timer.cancel();
+      setState(() {
+        _isButtonDisabled = false;
+      });
+      calcularPuntos();
+    }
+  }
+
+  // Método para iniciar el contador
+  void startTimer() {
+    _timer = Timer.periodic(const Duration(seconds: 3), (timer) {
+      setState(() {
+        points -= 2; // Restar 2 puntos cada 3 segundos
+      });
+      print(points);
+    });
+  }
+
+
+  void calcularPuntos() {
+
+    //Si es negativo, se pone en 8, asi se valora que acaben
+    if (points < 0) {
+      points = 8;
+    }
+
+    //Castear loggedInStudent.points a int
+    int loggedInStudentPointsInt = int.parse(loggedInStudent.points!);
+
+    //Suma los puntos calculados a loggedInStudent.points en Firebase
+    loggedInStudent.points = (loggedInStudentPointsInt + points).toString();
+
+    FirebaseFirestore.instance
+        .collection('students')
+        .doc(loggedInStudent.inventedEmail)
+        .update({'points': loggedInStudent.points});
+  }
+
+
 }

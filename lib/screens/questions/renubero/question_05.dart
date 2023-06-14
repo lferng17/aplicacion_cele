@@ -77,7 +77,7 @@ class _Question05State extends State<Question05> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Pregunta 05/06'),
+        title: const Text('Pregunta 05/06'),
         centerTitle: true,
         backgroundColor: Colors.green[600],
       ),
@@ -92,40 +92,40 @@ class _Question05State extends State<Question05> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Padding(
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Center(
                     child: Text(
                       question,
-                      style: TextStyle(color: Colors.white, fontSize: 20),
+                      style: const TextStyle(color: Colors.white, fontSize: 20),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                 ],
               ),
             ),
-            SizedBox(height: 1),
+            const SizedBox(height: 1),
             Expanded(
               child: Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(60),
                         topRight: Radius.circular(60))),
                 child: SingleChildScrollView(
                   child: Padding(
-                    padding: EdgeInsets.all(30),
+                    padding: const EdgeInsets.all(30),
                     child: Column(
                       children: <Widget>[
-                        SizedBox(
+                        const SizedBox(
                           height: 30,
                         ),
                         Container(
@@ -146,7 +146,7 @@ class _Question05State extends State<Question05> {
                                     return Column(
                                       children: [
                                         _buildDraggable(opcion),
-                                        SizedBox(height: 5),
+                                        const SizedBox(height: 5),
                                       ],
                                     );
                                   }).toList(),
@@ -161,7 +161,7 @@ class _Question05State extends State<Question05> {
                                     return Column(
                                       children: [
                                         _buildDragTarget(opcion),
-                                        SizedBox(height: 5),
+                                        const SizedBox(height: 5),
                                       ],
                                     );
                                   }).toList()
@@ -171,10 +171,10 @@ class _Question05State extends State<Question05> {
                             ],
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 40,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 40,
                         ),
                         IgnorePointer(
@@ -199,7 +199,7 @@ class _Question05State extends State<Question05> {
                                     );
                                   });
                                 },
-                                child: Text(
+                                child: const Text(
                                   "Siguiente",
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
@@ -229,7 +229,7 @@ class _Question05State extends State<Question05> {
       data: opcion,
       child: _buildTextContainer(opcion),
       feedback: _buildTextContainer(opcion),
-      childWhenDragging: Text(
+      childWhenDragging: const Text(
         '',
         style: TextStyle(fontSize: 40),
       ),
@@ -243,7 +243,7 @@ class _Question05State extends State<Question05> {
         alignment: Alignment.center,
         height: 50,
         width: 140,
-        padding: EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(10),
@@ -254,7 +254,7 @@ class _Question05State extends State<Question05> {
         ),
         child: Text(
           score[opcion] == true ? '✅' : opcion,
-          style: TextStyle(color: Colors.black, fontSize: 20),
+          style: const TextStyle(color: Colors.black, fontSize: 20),
         ),
       ),
     );
@@ -276,7 +276,7 @@ class _Question05State extends State<Question05> {
             ),
             height: 50,
             width: 160,
-            child: Center(
+            child: const Center(
               child: Text(
                 '✅',
                 style: TextStyle(
@@ -302,7 +302,7 @@ class _Question05State extends State<Question05> {
             child: Center(
               child: Text(
                 choices[opcion]['text'],
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.black,
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
@@ -340,7 +340,6 @@ class _Question05State extends State<Question05> {
       setState(() {
         points -= 2; // Restar 2 puntos cada 3 segundos
       });
-      print(points);
     });
   }
 

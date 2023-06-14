@@ -1,4 +1,6 @@
 import 'package:aplicacion_cele/screens/questions/renubero/resultadosRenubero.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../../../models/student_model.dart';
@@ -75,14 +77,31 @@ class _Question06State extends State<Question06> {
       selectedHablarsOption;
   String question = 'Demuestra lo que conoces sobre el Reñubero';
 
-  // bool para correcciones
-  bool showResults = false; 
+  //Puntos
+  int points = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    final User? currentUser = FirebaseAuth.instance.currentUser;
+    if (currentUser != null) {
+      FirebaseFirestore.instance
+          .collection('students')
+          .doc(currentUser.email)
+          .get()
+          .then((value) {
+        setState(() {
+          loggedInStudent = StudentModel.fromMap(value.data());
+        });
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Pregunta 06/06'),
+        title: const Text('Pregunta 06/06'),
         centerTitle: true,
         backgroundColor: Colors.green[600],
       ),
@@ -97,38 +116,38 @@ class _Question06State extends State<Question06> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Padding(
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
                     question,
-                    style: TextStyle(color: Colors.white, fontSize: 22),
+                    style: const TextStyle(color: Colors.white, fontSize: 22),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                 ],
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Expanded(
               child: Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(60),
                         topRight: Radius.circular(60))),
                 child: SingleChildScrollView(
                   child: Padding(
-                    padding: EdgeInsets.all(30),
+                    padding: const EdgeInsets.all(30),
                     child: Column(
                       children: <Widget>[
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         Container(
@@ -140,19 +159,20 @@ class _Question06State extends State<Question06> {
                             children: <Widget>[
                               Row(
                                 children: <Widget>[
-                                  Text(
+                                  const Text(
                                     'Reñubero es el señor de ',
                                     style: TextStyle(
                                         color: Colors.black, fontSize: 16),
                                   ),
                                   buildDropdowns(
-                                      lluviasOptions, selectedLluviasOption, 'las lluvias',
-                                      (value) {
+                                      lluviasOptions,
+                                      selectedLluviasOption,
+                                      'las lluvias', (value) {
                                     setState(() {
                                       selectedLluviasOption = value;
                                     });
                                   }),
-                                  Text(
+                                  const Text(
                                     ' y ',
                                     style: TextStyle(
                                         color: Colors.black, fontSize: 16),
@@ -162,20 +182,22 @@ class _Question06State extends State<Question06> {
                               Row(
                                 children: <Widget>[
                                   buildDropdowns(
-                                      tormentasOptions, selectedTormentasOption, 'las tormentas',
-                                      (value) {
+                                      tormentasOptions,
+                                      selectedTormentasOption,
+                                      'las tormentas', (value) {
                                     setState(() {
                                       selectedTormentasOption = value;
                                     });
                                   }),
-                                  Text(
+                                  const Text(
                                     ' . Es un ',
                                     style: TextStyle(
                                         color: Colors.black, fontSize: 16),
                                   ),
                                   buildDropdowns(
-                                      personajeOptions, selectedPersonajeOption, 'personaje',
-                                      (value) {
+                                      personajeOptions,
+                                      selectedPersonajeOption,
+                                      'personaje', (value) {
                                     setState(() {
                                       selectedPersonajeOption = value;
                                     });
@@ -185,24 +207,27 @@ class _Question06State extends State<Question06> {
                               Row(
                                 children: <Widget>[
                                   buildDropdowns(
-                                      ancianoOptions, selectedAncianoOption, 'anciano',
-                                      (value) {
+                                      ancianoOptions,
+                                      selectedAncianoOption,
+                                      'anciano', (value) {
                                     setState(() {
                                       selectedAncianoOption = value;
                                     });
                                   }),
-                                  Text(
+                                  const Text(
                                     ' , ',
                                     style: TextStyle(
                                         color: Colors.black, fontSize: 16),
                                   ),
-                                  buildDropdowns(malhumoradoOptions,
-                                      selectedMalhumoradoOption, 'malhumorado', (value) {
+                                  buildDropdowns(
+                                      malhumoradoOptions,
+                                      selectedMalhumoradoOption,
+                                      'malhumorado', (value) {
                                     setState(() {
                                       selectedMalhumoradoOption = value;
                                     });
                                   }),
-                                  Text(
+                                  const Text(
                                     ' , ',
                                     style: TextStyle(
                                         color: Colors.black, fontSize: 16),
@@ -210,7 +235,7 @@ class _Question06State extends State<Question06> {
                                 ],
                               ),
                               Row(
-                                children: <Widget>[
+                                children: const <Widget>[
                                   SizedBox(
                                     height: 40,
                                   ),
@@ -224,13 +249,14 @@ class _Question06State extends State<Question06> {
                               Row(
                                 children: <Widget>[
                                   buildDropdowns(
-                                      humanosOptions, selectedHumanosOption, 'los humanos',
-                                      (value) {
+                                      humanosOptions,
+                                      selectedHumanosOption,
+                                      'los humanos', (value) {
                                     setState(() {
                                       selectedHumanosOption = value;
                                     });
                                   }),
-                                  Text(
+                                  const Text(
                                     ' . Aunque la mayoría le ',
                                     style: TextStyle(
                                         color: Colors.black, fontSize: 16),
@@ -238,7 +264,7 @@ class _Question06State extends State<Question06> {
                                 ],
                               ),
                               Row(
-                                children: <Widget>[
+                                children: const <Widget>[
                                   SizedBox(
                                     height: 40,
                                   ),
@@ -252,13 +278,14 @@ class _Question06State extends State<Question06> {
                               Row(
                                 children: <Widget>[
                                   buildDropdowns(
-                                      leyendasOptions, selectedLeyendasOption, 'leonesas',
-                                      (value) {
+                                      leyendasOptions,
+                                      selectedLeyendasOption,
+                                      'leonesas', (value) {
                                     setState(() {
                                       selectedLeyendasOption = value;
                                     });
                                   }),
-                                  Text(
+                                  const Text(
                                     ' tiene también otros nombres',
                                     style: TextStyle(
                                         color: Colors.black, fontSize: 16),
@@ -267,19 +294,20 @@ class _Question06State extends State<Question06> {
                               ),
                               Row(
                                 children: <Widget>[
-                                  Text(
+                                  const Text(
                                     'como ',
                                     style: TextStyle(
                                         color: Colors.black, fontSize: 16),
                                   ),
                                   buildDropdowns(
-                                      nombresOptions, selectedNombresOption, 'Nubero, Renubero o Riñobero',
-                                      (value) {
+                                      nombresOptions,
+                                      selectedNombresOption,
+                                      'Nubero, Renubero o Riñobero', (value) {
                                     setState(() {
                                       selectedNombresOption = value;
                                     });
                                   }),
-                                  Text(
+                                  const Text(
                                     ' .',
                                     style: TextStyle(
                                         color: Colors.black, fontSize: 16),
@@ -287,7 +315,7 @@ class _Question06State extends State<Question06> {
                                 ],
                               ),
                               Row(
-                                children: <Widget>[
+                                children: const <Widget>[
                                   SizedBox(
                                     height: 40,
                                   ),
@@ -300,19 +328,20 @@ class _Question06State extends State<Question06> {
                               ),
                               Row(
                                 children: <Widget>[
-                                  Text(
+                                  const Text(
                                     'tormentas y por eso es muy ',
                                     style: TextStyle(
                                         color: Colors.black, fontSize: 16),
                                   ),
                                   buildDropdowns(
-                                      poderosoOptions, selectedPoderosoOption, 'poderoso',
-                                      (value) {
+                                      poderosoOptions,
+                                      selectedPoderosoOption,
+                                      'poderoso', (value) {
                                     setState(() {
                                       selectedPoderosoOption = value;
                                     });
                                   }),
-                                  Text(
+                                  const Text(
                                     ' .',
                                     style: TextStyle(
                                         color: Colors.black, fontSize: 16),
@@ -320,7 +349,7 @@ class _Question06State extends State<Question06> {
                                 ],
                               ),
                               Row(
-                                children: <Widget>[
+                                children: const <Widget>[
                                   SizedBox(
                                     height: 40,
                                   ),
@@ -334,13 +363,14 @@ class _Question06State extends State<Question06> {
                               Row(
                                 children: <Widget>[
                                   buildDropdowns(
-                                      bastonOptions, selectedBastonOption, 'bastón de madera',
-                                      (value) {
+                                      bastonOptions,
+                                      selectedBastonOption,
+                                      'bastón de madera', (value) {
                                     setState(() {
                                       selectedBastonOption = value;
                                     });
                                   }),
-                                  Text(
+                                  const Text(
                                     ' con el que inicia las',
                                     style: TextStyle(
                                         color: Colors.black, fontSize: 16),
@@ -348,7 +378,7 @@ class _Question06State extends State<Question06> {
                                 ],
                               ),
                               Row(
-                                children: <Widget>[
+                                children: const <Widget>[
                                   SizedBox(
                                     height: 40,
                                   ),
@@ -362,13 +392,14 @@ class _Question06State extends State<Question06> {
                               Row(
                                 children: <Widget>[
                                   buildDropdowns(
-                                      accionesOptions, selectedAccionesOption, 'rayos, truenos y chaparrones',
-                                      (value) {
+                                      accionesOptions,
+                                      selectedAccionesOption,
+                                      'rayos, truenos y chaparrones', (value) {
                                     setState(() {
                                       selectedAccionesOption = value;
                                     });
                                   }),
-                                  Text(
+                                  const Text(
                                     ' . Por eso',
                                     style: TextStyle(
                                         color: Colors.black, fontSize: 16),
@@ -376,7 +407,7 @@ class _Question06State extends State<Question06> {
                                 ],
                               ),
                               Row(
-                                children: <Widget>[
+                                children: const <Widget>[
                                   SizedBox(
                                     height: 40,
                                   ),
@@ -389,8 +420,11 @@ class _Question06State extends State<Question06> {
                               ),
                               Row(
                                 children: <Widget>[
-                                  buildDropdowns(exclamacionOptions,
-                                      selectedExclamacionOption, '¡¡Rayos y centellas, luz de las estrellas!!', (value) {
+                                  buildDropdowns(
+                                      exclamacionOptions,
+                                      selectedExclamacionOption,
+                                      '¡¡Rayos y centellas, luz de las estrellas!!',
+                                      (value) {
                                     setState(() {
                                       selectedExclamacionOption = value;
                                     });
@@ -398,7 +432,7 @@ class _Question06State extends State<Question06> {
                                 ],
                               ),
                               Row(
-                                children: <Widget>[
+                                children: const <Widget>[
                                   SizedBox(
                                     height: 40,
                                   ),
@@ -411,18 +445,18 @@ class _Question06State extends State<Question06> {
                               ),
                               Row(
                                 children: <Widget>[
-                                  Text(
+                                  const Text(
                                     'tormenta, aguza ',
                                     style: TextStyle(
                                         color: Colors.black, fontSize: 16),
                                   ),
-                                  buildDropdowns(
-                                      oidoOptions, selectedOidoOption, 'el oído', (value) {
+                                  buildDropdowns(oidoOptions,
+                                      selectedOidoOption, 'el oído', (value) {
                                     setState(() {
                                       selectedOidoOption = value;
                                     });
                                   }),
-                                  Text(
+                                  const Text(
                                     ' ... quizá lo',
                                     style: TextStyle(
                                         color: Colors.black, fontSize: 16),
@@ -431,19 +465,18 @@ class _Question06State extends State<Question06> {
                               ),
                               Row(
                                 children: <Widget>[
-                                  Text(
+                                  const Text(
                                     'escuches ',
                                     style: TextStyle(
                                         color: Colors.black, fontSize: 16),
                                   ),
-                                  buildDropdowns(
-                                      hablarOptions, selectedHablarsOption, 'hablar',
-                                      (value) {
+                                  buildDropdowns(hablarOptions,
+                                      selectedHablarsOption, 'hablar', (value) {
                                     setState(() {
                                       selectedHablarsOption = value;
                                     });
                                   }),
-                                  Text(
+                                  const Text(
                                     ' ... ',
                                     style: TextStyle(
                                         color: Colors.black, fontSize: 16),
@@ -453,32 +486,7 @@ class _Question06State extends State<Question06> {
                             ],
                           ),
                         ),
-                        SizedBox(
-                          height: 40,
-                        ),
-                        Container(
-                          width: 100,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(50),
-                              color: Colors.green[500]!),
-                          child: MaterialButton(
-                            onPressed: () {
-                              setState(() {
-                                showResults = true;
-                              });
-                            },
-                            child: Text(
-                              "Corregir",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 14.0,
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(
+                        const SizedBox(
                           height: 40,
                         ),
                         Container(
@@ -489,6 +497,7 @@ class _Question06State extends State<Question06> {
                               color: Colors.green[600]!),
                           child: MaterialButton(
                             onPressed: () {
+                              calcularPuntos();
                               setState(() {
                                 Navigator.push(
                                   context,
@@ -498,7 +507,7 @@ class _Question06State extends State<Question06> {
                                 );
                               });
                             },
-                            child: Text(
+                            child: const Text(
                               "Siguiente",
                               textAlign: TextAlign.center,
                               style: TextStyle(
@@ -521,11 +530,11 @@ class _Question06State extends State<Question06> {
     );
   }
 
-  Widget buildDropdowns(List<String> options, String? selectedOption, String? correctOption,
-      Function(String?) onChanged) {
+  Widget buildDropdowns(List<String> options, String? selectedOption,
+      String? correctOption, Function(String?) onChanged) {
     final isCorrectOption = selectedOption == correctOption;
 
-    //Añadir puntos, ej: selecciona mal, -2 puntos. Selecciona bien, +5 puntos.
+    //Puntos: selecciona mal, -1 puntos. Selecciona bien, +2 puntos.
 
     return DropdownButton<String>(
       value: selectedOption,
@@ -535,15 +544,31 @@ class _Question06State extends State<Question06> {
           child: Text(
             option,
             style: TextStyle(
-                color: isCorrectOption
-                    ? Colors.green[600]
-                    : Colors.black),
+                color: isCorrectOption ? Colors.green[600] : Colors.black),
           ),
         );
       }).toList(),
       onChanged: onChanged,
       iconEnabledColor: Colors.green[600],
-      style: TextStyle(color: Colors.black, fontSize: 16),
+      style: const TextStyle(color: Colors.black, fontSize: 16),
     );
+  }
+
+  void calcularPuntos() {
+    //Si es negativo, se pone en 0
+    if (points < 0) {
+      points = 0;
+    }
+
+    //Castear loggedInStudent.points a int
+    int loggedInStudentPointsInt = int.parse(loggedInStudent.points!);
+
+    //Suma los puntos calculados a loggedInStudent.points en Firebase
+    loggedInStudent.points = (loggedInStudentPointsInt + points).toString();
+
+    FirebaseFirestore.instance
+        .collection('students')
+        .doc(loggedInStudent.inventedEmail)
+        .update({'points': loggedInStudent.points});
   }
 }

@@ -55,7 +55,7 @@ class _Question01State extends State<Question01> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Pregunta 01/06'),
+        title: const Text('Pregunta 01/06'),
         centerTitle: true,
         backgroundColor: Colors.green[600],
       ),
@@ -70,40 +70,40 @@ class _Question01State extends State<Question01> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Padding(
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Center(
                     child: Text(
                       question,
-                      style: TextStyle(color: Colors.white, fontSize: 22),
+                      style: const TextStyle(color: Colors.white, fontSize: 22),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                 ],
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Expanded(
               child: Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.only(
-                        topLeft: const Radius.circular(60),
+                        topLeft: Radius.circular(60),
                         topRight: Radius.circular(60))),
                 child: SingleChildScrollView(
                   child: Padding(
-                    padding: EdgeInsets.all(30),
+                    padding: const EdgeInsets.all(30),
                     child: Column(
                       children: <Widget>[
-                        SizedBox(
+                        const SizedBox(
                           height: 30,
                         ),
                         Container(
@@ -122,7 +122,7 @@ class _Question01State extends State<Question01> {
                             ],
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 40,
                         ),
                         Container(
@@ -136,10 +136,11 @@ class _Question01State extends State<Question01> {
                               : () {
                                   setState(() {
                                     showResults = true;
+                                    isCorrectionEnabled = false; //Bloquear respuestas
                                     calcularPuntos();
                                   });
                                 },// Si showResults es true, no se puede presionar el boton
-                            child: Text(
+                            child: const Text(
                               "Corregir",
                               textAlign: TextAlign.center,
                               style: TextStyle(
@@ -150,33 +151,40 @@ class _Question01State extends State<Question01> {
                             ),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 40,
                         ),
-                        Container(
-                          height: 50,
-                          width: 130,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(50),
-                              color: Colors.green[600]!),
-                          child: MaterialButton(
-                            onPressed: () {
-                              setState(() {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => Question02(),
+                        IgnorePointer(
+                          ignoring: isCorrectionEnabled,
+                          child: Opacity(
+                            opacity: isCorrectionEnabled ? 0.5 : 1.0,
+                            child: Container(
+                              height: 50,
+                              width: 130,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(50),
+                                color: Colors.green[600]!,
+                              ),
+                              child: MaterialButton(
+                                onPressed: () {
+                                  setState(() {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => Question02(),
+                                      ),
+                                    );
+                                  });
+                                },
+                                child: const Text(
+                                  "Siguiente",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16.0,
                                   ),
-                                );
-                              });
-                            },
-                            child: Text(
-                              "Siguiente",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16.0,
+                                ),
                               ),
                             ),
                           ),
@@ -212,7 +220,7 @@ class _Question01State extends State<Question01> {
         iconData = Icons.cancel;
       } else if (!isSelected && isCorrect) {
         borderColor = Colors.green;
-        backgroundColor = Colors.white;
+        backgroundColor = Colors.green[50]!;
       } else {
         borderColor = Colors.black26;
         backgroundColor = Colors.white;
@@ -223,7 +231,7 @@ class _Question01State extends State<Question01> {
     }
 
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 4.0),
+      padding: const EdgeInsets.symmetric(vertical: 4.0),
       child: Container(
         decoration: BoxDecoration(
           color: backgroundColor,
@@ -246,17 +254,17 @@ class _Question01State extends State<Question01> {
             }
           },
           child: Padding(
-            padding: EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(8.0),
             child: Row(
               children: [
                 Icon(
                   iconData,
                   color: borderColor,
                 ),
-                SizedBox(width: 8.0),
+                const SizedBox(width: 8.0),
                 Text(
                   answer,
-                  style: TextStyle(color: Colors.black),
+                  style: const TextStyle(color: Colors.black),
                 ),
               ],
             ),
