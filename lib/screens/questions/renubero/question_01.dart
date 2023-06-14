@@ -131,14 +131,14 @@ class _Question01State extends State<Question01> {
                               borderRadius: BorderRadius.circular(50),
                               color: Colors.green[500]!),
                           child: MaterialButton(
-                            onPressed: () {
-                              setState(() {
-                                showResults = true;
-                                isCorrectionEnabled =
-                                    false; //Bloquear respuestas
-                                calcularPuntos();
-                              });
-                            },
+                            onPressed: showResults
+                              ? null
+                              : () {
+                                  setState(() {
+                                    showResults = true;
+                                    calcularPuntos();
+                                  });
+                                },// Si showResults es true, no se puede presionar el boton
                             child: Text(
                               "Corregir",
                               textAlign: TextAlign.center,
@@ -266,33 +266,42 @@ class _Question01State extends State<Question01> {
     );
   }
 
-
   void calcularPuntos() {
-  points = 0;
-  
-  
-  for (int i = 0; i < selectedAnswers.length; i++) {
-    //+5 puntos por cada respuesta correcta
-    if (correctAnswers.contains(selectedAnswers[i])) {
-      points = points + 5;
+    points = 0;
+
+    for (int i = 0; i < selectedAnswers.length; i++) {
+      //+6 puntos por cada respuesta correcta
+      if (correctAnswers.contains(selectedAnswers[i])) {
+        points = points + 6;
+      }
+      //-3 puntos por cada respuesta incorrecta
+      else {
+        points = points - 3;
+      }
     }
-    //-2 puntos por cada respuesta incorrecta
-    else {
-      points = points - 2;
+
+    //+20 puntos si se seleccionan solo las 3 respuestas correctas
+    if (selectedAnswers.length == 3 &&
+        selectedAnswers.contains(rinobero) &&
+        selectedAnswers.contains(nubero) &&
+        selectedAnswers.contains(renubero)) {
+      points = 20;
     }
+
+    //Si es negativo, se pone en 0
+    if (points < 0) {
+      points = 0;
+    }
+
+    //Castear loggedInStudent.points a int
+    int loggedInStudentPointsInt = int.parse(loggedInStudent.points!);
+
+    //Suma los puntos calculados a loggedInStudent.points en Firebase
+    loggedInStudent.points = (loggedInStudentPointsInt + points).toString();
+
+    FirebaseFirestore.instance
+        .collection('students')
+        .doc(loggedInStudent.inventedEmail)
+        .update({'points': loggedInStudent.points});
   }
-    
-  //Castear loggedInStudent.points a int
-  int loggedInStudentPointsInt = int.parse(loggedInStudent.points!);
-
-  //Suma los puntos calculados a loggedInStudent.points en Firebase
-  loggedInStudent.points = (loggedInStudentPointsInt + points).toString();
-
-  FirebaseFirestore.instance
-      .collection('students')
-      .doc(loggedInStudent.inventedEmail)
-      .update({'points': loggedInStudent.points});
-}
-
-
 }

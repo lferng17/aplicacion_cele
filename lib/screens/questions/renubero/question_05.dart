@@ -1,7 +1,12 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:aplicacion_cele/screens/questions/renubero/question_06.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
+import '../../../models/student_model.dart';
 
 class Question05 extends StatefulWidget {
   const Question05({Key? key}) : super(key: key);
@@ -11,6 +16,8 @@ class Question05 extends StatefulWidget {
 }
 
 class _Question05State extends State<Question05> {
+  // user
+  StudentModel loggedInStudent = StudentModel();
   //Score
   final Map<String, bool> score = {};
   // Random seed
@@ -38,6 +45,33 @@ class _Question05State extends State<Question05> {
       'text': 'Ablanu',
     },
   };
+
+  //Variables para desbloquear el botón
+  int nRespuestas = 0;
+  bool _isButtonDisabled = true;
+
+  //Puntos
+  int points = 30;
+  late Timer _timer; // Timer para el contador
+
+  @override
+  void initState() {
+    super.initState();
+    startTimer(); // Iniciar el contador al cargar la página
+    final User? currentUser = FirebaseAuth.instance.currentUser;
+    if (currentUser != null) {
+      FirebaseFirestore.instance
+          .collection('students')
+          .doc(currentUser.email)
+          .get()
+          .then((value) {
+        setState(() {
+          loggedInStudent = StudentModel.fromMap(value.data());
+        });
+      });
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -143,30 +177,37 @@ class _Question05State extends State<Question05> {
                         SizedBox(
                           height: 40,
                         ),
-                        Container(
-                          height: 50,
-                          width: 130,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(50),
-                              color: Colors.green[600]!),
-                          child: MaterialButton(
-                            onPressed: () {
-                              setState(() {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => Question06(),
+                        IgnorePointer(
+                          ignoring: _isButtonDisabled,
+                          child: Opacity(
+                            opacity: _isButtonDisabled ? 0.5 : 1.0,
+                            child: Container(
+                              height: 50,
+                              width: 130,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(50),
+                                color: Colors.green[600]!,
+                              ),
+                              child: MaterialButton(
+                                onPressed: () {
+                                  setState(() {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => Question06(),
+                                      ),
+                                    );
+                                  });
+                                },
+                                child: Text(
+                                  "Siguiente",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16.0,
                                   ),
-                                );
-                              });
-                            },
-                            child: Text(
-                              "Siguiente",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16.0,
+                                ),
                               ),
                             ),
                           ),
@@ -204,13 +245,13 @@ class _Question05State extends State<Question05> {
         width: 140,
         padding: EdgeInsets.all(10),
         decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(10),
-              border: Border.all(
-                color: Colors.green[600]!,
-                width: 1.5,
-              ),
-            ),
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(
+            color: Colors.green[600]!,
+            width: 1.5,
+          ),
+        ),
         child: Text(
           score[opcion] == true ? '✅' : opcion,
           style: TextStyle(color: Colors.black, fontSize: 20),
@@ -276,8 +317,52 @@ class _Question05State extends State<Question05> {
         setState(() {
           score[opcion] = true;
         });
+        desbloquearBoton();
       },
       onLeave: (data) {},
     );
   }
+
+  void desbloquearBoton() {
+    nRespuestas++;
+    if (nRespuestas == 5) {
+      _timer.cancel();
+      setState(() {
+        _isButtonDisabled = false;
+      });
+      calcularPuntos();
+    }
+  }
+
+  // Método para iniciar el contador
+  void startTimer() {
+    _timer = Timer.periodic(const Duration(seconds: 3), (timer) {
+      setState(() {
+        points -= 2; // Restar 2 puntos cada 3 segundos
+      });
+      print(points);
+    });
+  }
+
+  void calcularPuntos() {
+
+    //Si es negativo, se pone en 8
+    if (points < 0) {
+      points = 8;
+    }
+
+    //Castear loggedInStudent.points a int
+    int loggedInStudentPointsInt = int.parse(loggedInStudent.points!);
+
+    //Suma los puntos calculados a loggedInStudent.points en Firebase
+    loggedInStudent.points = (loggedInStudentPointsInt + points).toString();
+
+    FirebaseFirestore.instance
+        .collection('students')
+        .doc(loggedInStudent.inventedEmail)
+        .update({'points': loggedInStudent.points});
+  }
+
+
+
 }

@@ -113,7 +113,7 @@ class _ResultadosRenuberoState extends State<ResultadosRenubero> {
                   return Card(
                     child: ListTile(
                       title: Text(students[index].alias!),
-                      subtitle: Text(students[index].activityCode!),
+                      subtitle: Text(students[index].points!),
                     ),
                   );
                 },
