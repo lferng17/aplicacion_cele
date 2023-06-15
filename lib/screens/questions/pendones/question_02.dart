@@ -1,3 +1,4 @@
+import 'package:aplicacion_cele/screens/questions/pendones/question_03.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -128,7 +129,7 @@ class _Question02PendonState extends State<Question02Pendon> {
                               }
                             },
                             child: Image.asset(
-                              'assets/partesPendon.jpg', // Ruta de la imagen en la carpeta "assets"
+                              'assets/pendones/partesPendon.jpg', // Ruta de la imagen en la carpeta "assets"
                               width: 400,
                               height: 330,
                               fit: BoxFit.cover,
@@ -153,7 +154,7 @@ class _Question02PendonState extends State<Question02Pendon> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => Question02Pendon(),
+                                    builder: (context) => Question03Pendon(),
                                   ),
                                 );
                               });
