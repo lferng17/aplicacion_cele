@@ -47,7 +47,7 @@ class _ThemeSelectionState extends State<ThemeSelection> {
       color: Colors.green[600],
       child: MaterialButton(
         minWidth: MediaQuery.of(context).size.width,
-        padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+        padding: const EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
         onPressed: () {
           // generar codigo aleatorio
           String code = codigoAleatorio();
@@ -56,7 +56,7 @@ class _ThemeSelectionState extends State<ThemeSelection> {
               context: context,
               builder: (BuildContext context) {
                 return AlertDialog(
-                  title: Text("Código de acceso"),
+                  title: const Text("Código de acceso"),
                   content: Text(code),
                   actions: [
                     TextButton(
@@ -65,7 +65,7 @@ class _ThemeSelectionState extends State<ThemeSelection> {
                         Navigator.of(context).pop();
                         signOut(context);
                       },
-                      child: Text("Aceptar"),
+                      child: const Text("Aceptar"),
                     ),
                   ],
                 );
@@ -73,7 +73,7 @@ class _ThemeSelectionState extends State<ThemeSelection> {
           // guardar actividad en la base de datos
           addActivity(code, 'renubero');
         },
-        child: Text(
+        child: const Text(
           "Reñubero",
           textAlign: TextAlign.center,
           style: TextStyle(
@@ -92,7 +92,7 @@ class _ThemeSelectionState extends State<ThemeSelection> {
       color: Colors.green[600],
       child: MaterialButton(
         minWidth: MediaQuery.of(context).size.width,
-        padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+        padding: const EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
         onPressed: () {
           // generar codigo aleatorio
           String code = codigoAleatorio();
@@ -101,7 +101,7 @@ class _ThemeSelectionState extends State<ThemeSelection> {
               context: context,
               builder: (BuildContext context) {
                 return AlertDialog(
-                  title: Text("Código de acceso"),
+                  title: const Text("Código de acceso"),
                   content: Text(code),
                   actions: [
                     TextButton(
@@ -110,7 +110,7 @@ class _ThemeSelectionState extends State<ThemeSelection> {
                         Navigator.of(context).pop();
                         signOut(context);
                       },
-                      child: Text("Aceptar"),
+                      child: const Text("Aceptar"),
                     ),
                   ],
                 );
@@ -118,7 +118,7 @@ class _ThemeSelectionState extends State<ThemeSelection> {
           // guardar actividad en la base de datos
           addActivity(code, 'pendon');
         },
-        child: Text(
+        child: const Text(
           "Pendón",
           textAlign: TextAlign.center,
           style: TextStyle(
@@ -142,42 +142,42 @@ class _ThemeSelectionState extends State<ThemeSelection> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            SizedBox(
+            const SizedBox(
               height: 80,
             ),
             Padding(
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
                     "Bienvenido ${loggedInUser.firstName}",
-                    style: TextStyle(color: Colors.white, fontSize: 40),
+                    style: const TextStyle(color: Colors.white, fontSize: 40),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
-                  Text(
+                  const Text(
                     "Seleccione el tema a trabajar",
                     style: TextStyle(color: Colors.white, fontSize: 18),
                   ),
                 ],
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Expanded(
               child: Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(60),
                         topRight: Radius.circular(60))),
                 child: SingleChildScrollView(
                   child: Padding(
-                    padding: EdgeInsets.all(30),
+                    padding: const EdgeInsets.all(30),
                     child: Column(
                       children: <Widget>[
-                        SizedBox(
+                        const SizedBox(
                           height: 60,
                         ),
                         Container(
@@ -188,14 +188,14 @@ class _ThemeSelectionState extends State<ThemeSelection> {
                           child: Column(
                             children: <Widget>[
                               renuberoButton,
-                              SizedBox(
+                              const SizedBox(
                                 height: 20,
                               ),
                               pendonButton,
                             ],
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 40,
                         ),
                       ],

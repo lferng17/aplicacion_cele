@@ -26,7 +26,7 @@ class _LoginTeacherState extends State<LoginTeacher> {
   Widget build(BuildContext context) {
     // email field
     final emailField = Container(
-      padding: EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
           border: Border(bottom: BorderSide(color: Colors.grey[200]!))),
       child: TextFormField(
@@ -48,7 +48,7 @@ class _LoginTeacherState extends State<LoginTeacher> {
             emailController.text = value!;
           },
           textInputAction: TextInputAction.next,
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
             hintText: "Email",
             hintStyle: TextStyle(color: Colors.grey),
             border: InputBorder.none),),
@@ -56,7 +56,7 @@ class _LoginTeacherState extends State<LoginTeacher> {
 
     // password field
     final passwordField = Container(
-      padding: EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
           border: Border(bottom: BorderSide(color: Colors.grey[200]!))),
       child: TextFormField(
@@ -76,7 +76,7 @@ class _LoginTeacherState extends State<LoginTeacher> {
           passwordController.text = value!;
         },
         obscureText: true,
-        decoration: InputDecoration(
+        decoration: const InputDecoration(
             hintText: "Contraseña",
             hintStyle: TextStyle(color: Colors.grey),
             border: InputBorder.none),
@@ -87,17 +87,17 @@ class _LoginTeacherState extends State<LoginTeacher> {
     // login button
     final loginButton = Container(
       height: 50,
-      margin: EdgeInsets.symmetric(horizontal: 50),
+      margin: const EdgeInsets.symmetric(horizontal: 50),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(50),
-          color: Color.fromARGB(255, 123, 197, 110)),
+          color: const Color.fromARGB(255, 123, 197, 110)),
       child: MaterialButton(
         minWidth: MediaQuery.of(context).size.width,
-        padding: EdgeInsets.fromLTRB(10.0, 15.0, 10.0, 15.0),
+        padding: const EdgeInsets.fromLTRB(10.0, 15.0, 10.0, 15.0),
         onPressed: () {
           signIn(emailController.text, passwordController.text);
         },
-        child: Text("Iniciar Sesión",
+        child: const Text("Iniciar Sesión",
             textAlign: TextAlign.center,
             style: TextStyle(
                 fontSize: 18.0,
@@ -118,14 +118,14 @@ class _LoginTeacherState extends State<LoginTeacher> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            SizedBox(
+            const SizedBox(
               height: 80,
             ),
             Padding(
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
+                children: const <Widget>[
                   Text(
                     "Iniciar Sesión",
                     style: TextStyle(color: Colors.white, fontSize: 40),
@@ -140,27 +140,27 @@ class _LoginTeacherState extends State<LoginTeacher> {
                 ],
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Expanded(
               child: Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(60),
                         topRight: Radius.circular(60))),
                 child: SingleChildScrollView(
                   child: Padding(
-                    padding: EdgeInsets.all(30),
+                    padding: const EdgeInsets.all(30),
                     child: Column(
                       children: <Widget>[
-                        SizedBox(
+                        const SizedBox(
                           height: 60,
                         ),
                         Container(
                           decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(10),
-                              boxShadow: [
+                              boxShadow: const [
                                 BoxShadow(
                                     color: Color.fromRGBO(62, 159, 29, 0.294),
                                     blurRadius: 20,
@@ -176,14 +176,14 @@ class _LoginTeacherState extends State<LoginTeacher> {
                             ),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 40,
                         ),
                         loginButton,
-                        SizedBox(
+                        const SizedBox(
                           height: 40,
                         ),
-                        Text(
+                        const Text(
                           "¿No tienes cuenta?",
                           style: TextStyle(color: Colors.grey),
                         ),
@@ -194,7 +194,7 @@ class _LoginTeacherState extends State<LoginTeacher> {
                                 MaterialPageRoute(
                                     builder: (context) => Registration()));
                           },
-                          child: Text(
+                          child: const Text(
                             "Registrarse",
                             style: TextStyle(
                                 color: Colors.blue,

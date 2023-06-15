@@ -32,11 +32,11 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     // code field
     final codeField = Container(
-      padding: EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
           border: Border(bottom: BorderSide(color: Colors.grey[200]!))),
       child: TextFormField(
-        decoration: InputDecoration(
+        decoration: const InputDecoration(
             hintText: "Código de Actividad",
             hintStyle: TextStyle(color: Colors.grey),
             border: InputBorder.none),
@@ -53,7 +53,7 @@ class _HomeState extends State<Home> {
 
     // name field
     final nameField = Container(
-      padding: EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
           border: Border(bottom: BorderSide(color: Colors.grey[200]!))),
       child: TextFormField(
@@ -63,7 +63,7 @@ class _HomeState extends State<Home> {
         onSaved: (value) {
           nameController.text = value!;
         },
-        decoration: InputDecoration(
+        decoration: const InputDecoration(
             hintText: "Alias",
             hintStyle: TextStyle(color: Colors.grey),
             border: InputBorder.none),
@@ -75,10 +75,10 @@ class _HomeState extends State<Home> {
     // access button
     final accessButton = Container(
       height: 50,
-      margin: EdgeInsets.symmetric(horizontal: 50),
+      margin: const EdgeInsets.symmetric(horizontal: 50),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(50),
-          color: Color.fromARGB(255, 135, 207, 122)),
+          color: const Color.fromARGB(255, 135, 207, 122)),
       child: MaterialButton(
         minWidth: MediaQuery.of(context).size.width,
         onPressed: () {
@@ -89,7 +89,7 @@ class _HomeState extends State<Home> {
           String password = nameController.text + codeController.text;
           signUpStudent(email, password);
         },
-        child: Text(
+        child: const Text(
           "Acceder",
           textAlign: TextAlign.center,
           style: TextStyle(
@@ -113,19 +113,19 @@ class _HomeState extends State<Home> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            SizedBox(
+            const SizedBox(
               height: 80,
             ),
             Padding(
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text(
+                  const Text(
                     "Acceder",
                     style: TextStyle(color: Colors.white, fontSize: 40),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   DefaultTextStyle(
@@ -140,34 +140,34 @@ class _HomeState extends State<Home> {
                       pause: const Duration(milliseconds: 2000),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                 ],
               ),
               
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Expanded(
               child: Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(60),
                         topRight: Radius.circular(60))),
                 child: SingleChildScrollView(
                   child: Padding(
-                    padding: EdgeInsets.all(30),
+                    padding: const EdgeInsets.all(30),
                     child: Column(
                       children: <Widget>[
-                        SizedBox(
+                        const SizedBox(
                           height: 60,
                         ),
                         Container(
                           decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(10),
-                              boxShadow: [
+                              boxShadow: const [
                                 BoxShadow(
                                     color: Color.fromRGBO(62, 159, 29, 0.294),
                                     blurRadius: 20,
@@ -180,14 +180,14 @@ class _HomeState extends State<Home> {
                             ],
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 40,
                         ),
                         accessButton,
-                        SizedBox(
+                        const SizedBox(
                           height: 40,
                         ),
-                        Text(
+                        const Text(
                           "¿Eres profesor/tutor?",
                           style: TextStyle(color: Colors.grey),
                         ),
@@ -198,7 +198,7 @@ class _HomeState extends State<Home> {
                                 MaterialPageRoute(
                                     builder: (context) => LoginTeacher()));
                           },
-                          child: Text(
+                          child: const Text(
                             "Acceder",
                             style: TextStyle(
                                 color: Colors.blue,

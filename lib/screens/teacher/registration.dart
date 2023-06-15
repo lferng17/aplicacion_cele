@@ -32,7 +32,7 @@ class _RegistrationState extends State<Registration> {
   Widget build(BuildContext context) {
     // email field
     final emailField = Container(
-      padding: EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
           border: Border(bottom: BorderSide(color: Colors.grey[200]!))),
       child: TextFormField(
@@ -54,7 +54,7 @@ class _RegistrationState extends State<Registration> {
           emailController.text = value!;
         },
         textInputAction: TextInputAction.next,
-        decoration: InputDecoration(
+        decoration: const InputDecoration(
             hintText: "Email",
             hintStyle: TextStyle(color: Colors.grey),
             border: InputBorder.none),
@@ -63,7 +63,7 @@ class _RegistrationState extends State<Registration> {
 
     // first name field
     final firstNameField = Container(
-      padding: EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
           border: Border(bottom: BorderSide(color: Colors.grey[200]!))),
       child: TextFormField(
@@ -82,7 +82,7 @@ class _RegistrationState extends State<Registration> {
         onSaved: (value) {
           firstNameController.text = value!;
         },
-        decoration: InputDecoration(
+        decoration: const InputDecoration(
             hintText: "Nombre",
             hintStyle: TextStyle(color: Colors.grey),
             border: InputBorder.none),
@@ -92,7 +92,7 @@ class _RegistrationState extends State<Registration> {
 
     // second name field
     final secondNameField = Container(
-      padding: EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
           border: Border(bottom: BorderSide(color: Colors.grey[200]!))),
       child: TextFormField(
@@ -111,7 +111,7 @@ class _RegistrationState extends State<Registration> {
         onSaved: (value) {
           secondNameController.text = value!;
         },
-        decoration: InputDecoration(
+        decoration: const InputDecoration(
             hintText: "Apellidos",
             hintStyle: TextStyle(color: Colors.grey),
             border: InputBorder.none),
@@ -121,7 +121,7 @@ class _RegistrationState extends State<Registration> {
 
     // password field
     final passwordField = Container(
-      padding: EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
           border: Border(bottom: BorderSide(color: Colors.grey[200]!))),
       child: TextFormField(
@@ -141,7 +141,7 @@ class _RegistrationState extends State<Registration> {
           passwordController.text = value!;
         },
         obscureText: true,
-        decoration: InputDecoration(
+        decoration: const InputDecoration(
             hintText: "Contraseña",
             hintStyle: TextStyle(color: Colors.grey),
             border: InputBorder.none),
@@ -151,7 +151,7 @@ class _RegistrationState extends State<Registration> {
 
     // second name field
     final confirmPasswordField = Container(
-      padding: EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
           border: Border(bottom: BorderSide(color: Colors.grey[200]!))),
       child: TextFormField(
@@ -167,7 +167,7 @@ class _RegistrationState extends State<Registration> {
           confirmPasswordController.text = value!;
         },
         obscureText: true,
-        decoration: InputDecoration(
+        decoration: const InputDecoration(
             hintText: "Confirme contraseña",
             hintStyle: TextStyle(color: Colors.grey),
             border: InputBorder.none),
@@ -178,17 +178,17 @@ class _RegistrationState extends State<Registration> {
     // register button
     final registerButton = Container(
       height: 50,
-      margin: EdgeInsets.symmetric(horizontal: 50),
+      margin: const EdgeInsets.symmetric(horizontal: 50),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(50),
-          color: Color.fromARGB(255, 123, 197, 110)),
+          color: const Color.fromARGB(255, 123, 197, 110)),
       child: MaterialButton(
         minWidth: MediaQuery.of(context).size.width,
-        padding: EdgeInsets.fromLTRB(10.0, 15.0, 10.0, 15.0),
+        padding: const EdgeInsets.fromLTRB(10.0, 15.0, 10.0, 15.0),
         onPressed: () {
           signUp(emailController.text, passwordController.text);
         },
-        child: Text("Registrarse",
+        child: const Text("Registrarse",
             textAlign: TextAlign.center,
             style: TextStyle(
                 fontSize: 18.0,
@@ -209,14 +209,14 @@ class _RegistrationState extends State<Registration> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            SizedBox(
+            const SizedBox(
               height: 80,
             ),
             Padding(
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
+                children: const <Widget>[
                   Text(
                     "Registro",
                     style: TextStyle(color: Colors.white, fontSize: 40),
@@ -231,27 +231,27 @@ class _RegistrationState extends State<Registration> {
                 ],
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Expanded(
               child: Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(60),
                         topRight: Radius.circular(60))),
                 child: SingleChildScrollView(
                   child: Padding(
-                    padding: EdgeInsets.all(30),
+                    padding: const EdgeInsets.all(30),
                     child: Column(
                       children: <Widget>[
-                        SizedBox(
+                        const SizedBox(
                           height: 60,
                         ),
                         Container(
                           decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(10),
-                              boxShadow: [
+                              boxShadow: const [
                                 BoxShadow(
                                     color: Color.fromRGBO(62, 159, 29, 0.294),
                                     blurRadius: 20,
@@ -270,7 +270,7 @@ class _RegistrationState extends State<Registration> {
                             ),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 40,
                         ),
                         registerButton,

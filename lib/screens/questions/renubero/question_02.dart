@@ -21,7 +21,7 @@ class _Question02State extends State<Question02> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Pregunta 02/06'),
+        title: const Text('Pregunta 02/06'),
         centerTitle: true,
         backgroundColor: Colors.green[600],
       ),
@@ -36,40 +36,40 @@ class _Question02State extends State<Question02> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Padding(
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Center(
                     child: Text(
                       question,
-                      style: TextStyle(color: Colors.white, fontSize: 18),
+                      style: const TextStyle(color: Colors.white, fontSize: 18),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                 ],
               ),
             ),
-            SizedBox(height: 1),
+            const SizedBox(height: 1),
             Expanded(
               child: Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(60),
                         topRight: Radius.circular(60))),
                 child: SingleChildScrollView(
                   child: Padding(
-                    padding: EdgeInsets.all(30),
+                    padding: const EdgeInsets.all(30),
                     child: Column(
                       children: <Widget>[
-                        SizedBox(
+                        const SizedBox(
                           height: 30,
                         ),
                         Container(
@@ -79,48 +79,48 @@ class _Question02State extends State<Question02> {
                           ),
                           child: Column(
                             children: [
-                              SizedBox(height: 16),
+                              const SizedBox(height: 16),
                               Stepper(
                                 steps: [
                                   Step(
-                                      title: Text('Un bombero diría:'),
+                                      title: const Text('Un bombero diría:'),
                                       content: TextFormField(
-                                        decoration: InputDecoration(
+                                        decoration: const InputDecoration(
                                           hintText: 'Escribe aquí',
                                         ),
                                       )),
                                   Step(
-                                      title: Text('¿Y un informático?'),
+                                      title: const Text('¿Y un informático?'),
                                       content: TextFormField(
-                                        decoration: InputDecoration(
+                                        decoration: const InputDecoration(
                                           hintText: 'Escribe aquí',
                                         ),
                                       )),
                                   Step(
-                                      title: Text('¿Y un profesor?'),
+                                      title: const Text('¿Y un profesor?'),
                                       content: TextFormField(
-                                        decoration: InputDecoration(
+                                        decoration: const InputDecoration(
                                           hintText: 'Escribe aquí',
                                         ),
                                       )),
                                   Step(
-                                      title: Text('¿Y un estudiante?'),
+                                      title: const Text('¿Y un estudiante?'),
                                       content: TextFormField(
-                                        decoration: InputDecoration(
+                                        decoration: const InputDecoration(
                                           hintText: 'Escribe aquí',
                                         ),
                                       )),
                                   Step(
-                                      title: Text('¿Y un policía?'),
+                                      title: const Text('¿Y un policía?'),
                                       content: TextFormField(
-                                        decoration: InputDecoration(
+                                        decoration: const InputDecoration(
                                           hintText: 'Escribe aquí',
                                         ),
                                       )),
                                   Step(
-                                      title: Text('¿Y un carpintero?'),
+                                      title: const Text('¿Y un carpintero?'),
                                       content: TextFormField(
-                                        decoration: InputDecoration(
+                                        decoration: const InputDecoration(
                                           hintText: 'Escribe aquí',
                                         ),
                                       )),
@@ -151,10 +151,10 @@ class _Question02State extends State<Question02> {
                             ],
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 40,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 40,
                         ),
                         Container(
@@ -174,7 +174,7 @@ class _Question02State extends State<Question02> {
                                 );
                               });
                             },
-                            child: Text(
+                            child: const Text(
                               "Siguiente",
                               textAlign: TextAlign.center,
                               style: TextStyle(

@@ -46,7 +46,7 @@ class _WaitingPageState extends State<WaitingPage> {
         });
       });
     }
-    Timer(Duration(seconds: 4), () {
+    Timer(const Duration(seconds: 4), () {
       // Navegar a otra página después de 4 segundos
       redirectToQuestion(context); // Cambia el número de pregunta según sea necesario
     });
@@ -56,9 +56,9 @@ class _WaitingPageState extends State<WaitingPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Waiting Page'),
+        title: const Text('Waiting Page'),
       ),
-      body: Center(
+      body: const Center(
         child: Text(
           'Espera...',
           style: TextStyle(fontSize: 24),
