@@ -32,7 +32,7 @@ class _Question03PendonState extends State<Question03Pendon> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Pregunta 02/05'),
+        title: const Text('Pregunta 03/05'),
         centerTitle: true,
         backgroundColor: Colors.green[600],
       ),
@@ -82,17 +82,17 @@ class _Question03PendonState extends State<Question03Pendon> {
                           height: 10,
                         ),
                         SizedBox(
-                            height: MediaQuery.of(context).size.width / 3 * 4,
+                            height: MediaQuery.of(context).size.width / 3 * 3.5,
                             width: MediaQuery.of(context).size.width,
                             child: GridView.builder(
                                 itemCount: juego.gameImg!.length,
                                 gridDelegate:
                                     const SliverGridDelegateWithFixedCrossAxisCount(
                                   crossAxisCount: 3,
-                                  crossAxisSpacing: 16.0,
-                                  mainAxisSpacing: 16.0,
+                                  crossAxisSpacing: 20.0,
+                                  mainAxisSpacing: 20.0,
                                 ),
-                                padding: const EdgeInsets.all(16.0),
+                                padding: const EdgeInsets.all(20.0),
                                 itemBuilder: (context, index) {
                                   return GestureDetector(
                                     onTap: () {
@@ -189,9 +189,8 @@ class _Question03PendonState extends State<Question03Pendon> {
 }
 
 class Game {
-  final Color hiddenCard = Colors.red;
-  List<Color>? gameColors;
-  List<String>? gameImg;
+
+  List<String>? gameImg; 
 
   final String hiddenCardpath = "assets/pendones/interrogacion.jpeg";
   List<String> cards_list = [
@@ -211,9 +210,9 @@ class Game {
   final int cardCount = 12;
   List<Map<int, String>> matchCheck = [];
 
-  //methods
   void initGame() {
-    gameColors = List.generate(cardCount, (index) => hiddenCard);
     gameImg = List.generate(cardCount, (index) => hiddenCardpath);
+    cards_list.shuffle();
   }
+
 }
