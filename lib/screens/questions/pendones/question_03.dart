@@ -1,3 +1,4 @@
+import 'package:aplicacion_cele/screens/questions/pendones/question_04.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -159,7 +160,7 @@ class _Question03PendonState extends State<Question03Pendon> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => Question03Pendon(),
+                                    builder: (context) => Question04Pendon(),
                                   ),
                                 );
                               });
