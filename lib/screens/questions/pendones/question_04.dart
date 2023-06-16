@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
 import '../../../models/student_model.dart';
 
@@ -17,7 +18,27 @@ class _Question04PendonState extends State<Question04Pendon> {
 
   // Pregunta
   String question =
-      'Imagina que tienes que diseñar\nel pendón de tu pueblo/ciudad.\nElige de cada una de sus partes\nla opción que más te guste';
+      'Imagina que tienes que diseñar\nel pendón de tu pueblo/ciudad.\nElige de cada una de sus partes\nla opción que más te guste.';
+
+  // Imagenes
+  List<String> carouselImagePanioItems = [
+    'assets/pendones/PendonUña.png',
+    'assets/pendones/PendonCaboalles.png',
+    'assets/pendones/PendonLugueros.png',
+    'assets/pendones/PendonGenicera.png',
+  ];
+  List<String> carouselImageMastilItems = [
+    'assets/pendones/PendonUña.png',
+    'assets/pendones/PendonCaboalles.png',
+    'assets/pendones/PendonLugueros.png',
+    'assets/pendones/PendonGenicera.png',
+  ];
+  List<String> carouselImageCruzItems = [
+    'assets/pendones/PendonUña.png',
+    'assets/pendones/PendonCaboalles.png',
+    'assets/pendones/PendonLugueros.png',
+    'assets/pendones/PendonGenicera.png',
+  ];
 
   @override
   void initState() {
@@ -85,119 +106,102 @@ class _Question04PendonState extends State<Question04Pendon> {
                         topLeft: Radius.circular(60),
                         topRight: Radius.circular(60))),
                 child: SingleChildScrollView(
-                  child: Padding(
-                    padding: const EdgeInsets.all(30),
-                    child: Column(
-                      children: <Widget>[
-                        Container(
-                          height: 200,
-                          margin: const EdgeInsets.all(10),
-                          child: ListView(
-                            scrollDirection: Axis.horizontal,
-                            children: <Widget>[
-                              addImage('assets/pendones/PendonUña.png'),
-                              addImage('assets/pendones/PendonGenicera.png'),
-                              addImage('assets/pendones/PendonCaboalles.png'),
-                              addImage('assets/pendones/PendonLugueros.png'),
-                            ],
-                          ),
+                  child: Column(
+                    children: <Widget>[
+                      const SizedBox(height: 20),
+                      carouselSlider(carouselImagePanioItems),
+                      const SizedBox(height: 20),
+                      carouselSlider(carouselImageMastilItems),
+                      const SizedBox(height: 20),
+                      carouselSlider(carouselImageCruzItems),
+                      const SizedBox(height: 20),
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10),
                         ),
-                        const SizedBox(height: 20),
-                        Container(
-                          height: 200,
-                          margin: const EdgeInsets.all(10),
-                          child: ListView(
-                            scrollDirection: Axis.horizontal,
-                            children: <Widget>[
-                              addImage('assets/pendones/PendonUña.png'),
-                              addImage('assets/pendones/PendonGenicera.png'),
-                              addImage('assets/pendones/PendonCaboalles.png'),
-                              addImage('assets/pendones/PendonLugueros.png'),
-                            ],
-                          ),
+                        child: Column(
+                          children: <Widget>[],
                         ),
-                        const SizedBox(height: 20),
-                        Container(
-                          height: 200,
-                          margin: const EdgeInsets.all(10),
-                          child: ListView(
-                            scrollDirection: Axis.horizontal,
-                            children: <Widget>[
-                              addImage('assets/pendones/PendonUña.png'),
-                              addImage('assets/pendones/PendonGenicera.png'),
-                              addImage('assets/pendones/PendonCaboalles.png'),
-                              addImage('assets/pendones/PendonLugueros.png'),
-                            ],
-                          ),
-                        ),
-                        const SizedBox(height: 20),
-                        Container(
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Column(
-                            children: <Widget>[],
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 40,
-                        ),
-                        const SizedBox(
-                          height: 40,
-                        ),
-                        Container(
-                          height: 50,
-                          width: 130,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(50),
-                              color: Colors.green[600]!),
-                          child: MaterialButton(
-                            onPressed: () {
-                              setState(() {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => Question04Pendon(),
-                                  ),
-                                );
-                              });
-                            },
-                            child: const Text(
-                              "Siguiente",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16.0,
-                              ),
+                      ),
+                      const SizedBox(
+                        height: 40,
+                      ),
+                      const SizedBox(
+                        height: 40,
+                      ),
+                      Container(
+                        height: 50,
+                        width: 130,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(50),
+                            color: Colors.green[600]!),
+                        child: MaterialButton(
+                          onPressed: () {
+                            setState(() {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => Question04Pendon(),
+                                ),
+                              );
+                            });
+                          },
+                          child: const Text(
+                            "Siguiente",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16.0,
                             ),
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),
     );
   }
 
-  Widget addImage(String image) {
-    return Container(
-      margin: const EdgeInsets.all(10),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(20),
-        child: Image.asset(
-          image,
-          height: 100,
-          width: 100,
-          fit: BoxFit.cover,
-        ),
+  Widget carouselSlider(List<String> images) {
+    return CarouselSlider(
+      items: images.map((item) {
+        return Builder(
+          builder: (BuildContext context) {
+            return carouselCard(
+              imageUrl: item,
+            );
+          },
+        );
+      }).toList(),
+      options: CarouselOptions(
+        height: 150,
+        viewportFraction: 0.8,
+        enlargeCenterPage: true,
+        autoPlay: false,
       ),
+    );
+  }
+
+  Widget carouselCard({required String imageUrl}) {
+    return Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10.0),
+      ),
+      shadowColor: Colors.grey,
+      elevation: 10.0,
+      child: ClipRRect(
+          borderRadius: BorderRadius.circular(10.0),
+          child: Image.asset(
+            imageUrl,
+            width: 250,
+          )),
     );
   }
 }

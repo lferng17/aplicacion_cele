@@ -26,6 +26,12 @@
       "languageVersion": "2.17"
     },
     {
+      "name": "carousel_slider",
+      "rootUri": "file:///Users/luifer/.pub-cache/hosted/pub.dev/carousel_slider-4.2.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "characters",
       "rootUri": "file:///Users/luifer/.pub-cache/hosted/pub.dev/characters-1.2.1",
       "packageUri": "lib/",
@@ -296,7 +302,7 @@
       "languageVersion": "2.19"
     }
   ],
-  "generated": "2023-06-15T16:09:45.700738Z",
+  "generated": "2023-06-16T11:07:35.263854Z",
   "generator": "pub",
   "generatorVersion": "2.19.6"
 }

@@ -27,9 +27,6 @@ class _WaitingPageState extends State<WaitingPage> {
   // activity
   ActivityModel currentActivity = ActivityModel();
 
-  // Firebase
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-
 
   @override
   void initState() {
@@ -54,14 +51,10 @@ class _WaitingPageState extends State<WaitingPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Waiting Page'),
-      ),
-      body: const Center(
-        child: Text(
-          'Espera...',
-          style: TextStyle(fontSize: 24),
+    return const Scaffold(
+      body: Center(
+        child: CircularProgressIndicator(
+          color: Colors.green,
         ),
       ),
     );
@@ -87,10 +80,10 @@ class _WaitingPageState extends State<WaitingPage> {
       );
     } else {
       // La pregunta no se encontró en Firebase
-      print('La pregunta no existe en Firebase.');
+      const AlertDialog(title: Text('La pregunta no existe en Firebase.'));
     }
   } catch (e) {
-    print('Error al redirigir a la pregunta');
+    const AlertDialog(title: Text('Error al redirigir a la pregunta'));
   }
 }
 

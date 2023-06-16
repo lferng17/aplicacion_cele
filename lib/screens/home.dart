@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:aplicacion_cele/models/activity_model.dart';
 import 'package:aplicacion_cele/models/student_model.dart';
 import 'package:aplicacion_cele/screens/teacher/login_teacher.dart';
 import 'package:aplicacion_cele/screens/waitingPage.dart';
@@ -81,13 +82,26 @@ class _HomeState extends State<Home> {
           color: const Color.fromARGB(255, 135, 207, 122)),
       child: MaterialButton(
         minWidth: MediaQuery.of(context).size.width,
-        onPressed: () {
+        onPressed: () async {
           String email = nameController.text +
               codeController.text +
               (Random().nextInt(90) + 10).toString() +
               "@appcele.com";
           String password = nameController.text + codeController.text;
-          signUpStudent(email, password);
+          if(await checkActivityCode(codeController.text)){
+            signUpStudent(email, password);
+          }else{
+            Fluttertoast.showToast(
+                msg: "Código de actividad incorrecto",
+                toastLength: Toast.LENGTH_SHORT,
+                gravity: ToastGravity.CENTER,
+                timeInSecForIosWeb: 1,
+                backgroundColor: Colors.red,
+                textColor: Colors.white,
+                fontSize: 16.0
+            );
+          }
+          
         },
         child: const Text(
           "Acceder",
@@ -216,6 +230,25 @@ class _HomeState extends State<Home> {
       ),
     );
   }
+
+  //Metodo que devuelve true si el código de la actividad existe
+  Future<bool> checkActivityCode(String code) async {
+  try {
+    QuerySnapshot<Map<String, dynamic>> querySnapshot = await FirebaseFirestore.instance
+        .collection('activities')
+        .where('code', isEqualTo: code)
+        .get();
+
+    return querySnapshot.size > 0;
+  } catch (e) {
+    print('Error checking activity code: $e');
+    return false;
+  }
+}
+
+
+
+
 
   void signUpStudent(String email, String password) async {
     await _auth
