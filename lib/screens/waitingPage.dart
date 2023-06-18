@@ -43,8 +43,8 @@ class _WaitingPageState extends State<WaitingPage> {
         });
       });
     }
-    Timer(const Duration(seconds: 4), () {
-      // Navegar a otra página después de 4 segundos
+    Timer(const Duration(seconds: 1), () {
+      // Navegar a otra página después de 1 segundo
       redirectToQuestion(context); // Cambia el número de pregunta según sea necesario
     });
   }

@@ -48,6 +48,7 @@ class _Question01PendonState extends State<Question01Pendon> {
         title: const Text('Pregunta 01/05'),
         centerTitle: true,
         backgroundColor: Colors.green[600],
+        automaticallyImplyLeading: false,
       ),
       body: Container(
         width: double.infinity,

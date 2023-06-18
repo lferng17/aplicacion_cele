@@ -22,19 +22,19 @@ class _Question04PendonState extends State<Question04Pendon> {
 
   // Imagenes
   List<String> carouselImagePanioItems = [
-    'assets/pendones/PendonUña.png',
+    'assets/pendones/PendonUnia.png',
     'assets/pendones/PendonCaboalles.png',
     'assets/pendones/PendonLugueros.png',
     'assets/pendones/PendonGenicera.png',
   ];
   List<String> carouselImageMastilItems = [
-    'assets/pendones/PendonUña.png',
+    'assets/pendones/PendonUnia.png',
     'assets/pendones/PendonCaboalles.png',
     'assets/pendones/PendonLugueros.png',
     'assets/pendones/PendonGenicera.png',
   ];
   List<String> carouselImageCruzItems = [
-    'assets/pendones/PendonUña.png',
+    'assets/pendones/PendonUnia.png',
     'assets/pendones/PendonCaboalles.png',
     'assets/pendones/PendonLugueros.png',
     'assets/pendones/PendonGenicera.png',

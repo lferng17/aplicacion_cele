@@ -13,6 +13,8 @@ class ResultadosRenubero extends StatefulWidget {
 }
 
 class _ResultadosRenuberoState extends State<ResultadosRenubero> {
+  // Variable de estado para controlar la carga de datos
+  bool isLoading = true;
   // user
   StudentModel loggedInStudent = StudentModel();
   // Lista de estudiantes que han hecho la actividad
@@ -58,6 +60,7 @@ class _ResultadosRenuberoState extends State<ResultadosRenubero> {
 
       setState(() {
         this.students = students;
+        isLoading = false; // Ya se cargaron los datos
       });
     });
   }
@@ -70,113 +73,124 @@ class _ResultadosRenuberoState extends State<ResultadosRenubero> {
         centerTitle: true,
         backgroundColor: Colors.green[600],
       ),
-      body: Container(
-        width: double.infinity,
-        decoration: BoxDecoration(
-            gradient: LinearGradient(begin: Alignment.topCenter, colors: [
-          Colors.green[600]!,
-          Colors.green[400]!,
-          Colors.green[200]!
-        ])),
-        child: Column(
-          children: <Widget>[
-            const SizedBox(
-              height: 20,
-            ),
-            Padding(
-              padding: const EdgeInsets.all(20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Center(
-                    child: Text(
-                      'Resultados Actividad ${loggedInStudent.activityCode}',
-                      style: const TextStyle(color: Colors.white, fontSize: 22),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 20),
-            Expanded(
-              child: ListView.builder(
-                itemCount: students.length,
-                itemBuilder: (context, index) {
-                  return Card(
-                    child: ListTile(
-                      title: Text(students[index].alias!),
-                      subtitle: Text(students[index].points!),
-                    ),
-                  );
-                },
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: Container(
-                      height: 50,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(50),
-                        color: Colors.green[600]!, 
+      body: Stack(
+        children: [
+          Container(
+            width: double.infinity,
+            decoration: BoxDecoration(
+                gradient: LinearGradient(begin: Alignment.topCenter, colors: [
+              Colors.green[600]!,
+              Colors.green[400]!,
+              Colors.green[200]!
+            ])),
+            child: Column(
+              children: <Widget>[
+                const SizedBox(
+                  height: 20,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Center(
+                        child: Text(
+                          'Resultados Actividad ${loggedInStudent.activityCode}',
+                          style: const TextStyle(
+                              color: Colors.white, fontSize: 22),
+                        ),
                       ),
-                      child: MaterialButton(
-                        onPressed: () {
-                          setState(() {
-                            Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(
-                                    builder: (context) => ResultadosRenubero()));
-                          });
-                        },
-                        child: const Text(
-                          "Recargar",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16.0,
+                      const SizedBox(
+                        height: 10,
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 20),
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: students.length,
+                    itemBuilder: (context, index) {
+                      return Card(
+                        child: ListTile(
+                          title: Text(students[index].alias!),
+                          subtitle: Text(students[index].points!),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: Container(
+                          height: 50,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(50),
+                            color: Colors.green[600]!,
+                          ),
+                          child: MaterialButton(
+                            onPressed: () {
+                              setState(() {
+                                Navigator.of(context).pushReplacement(
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            ResultadosRenubero()));
+                              });
+                            },
+                            child: const Text(
+                              "Recargar",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16.0,
+                              ),
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ),
-                  const SizedBox(width: 10), // Espacio entre los botones
-                  Expanded(
-                    child: Container(
-                      height: 50,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(50),
-                        color: Colors.green[800]!,
-                      ),
-                      child: MaterialButton(
-                        onPressed: () {
-                          setState(() {
-                            signOut(context);
-                          });
-                        },
-                        child: const Text(
-                          "Salir",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16.0,
+                      const SizedBox(width: 10), // Espacio entre los botones
+                      Expanded(
+                        child: Container(
+                          height: 50,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(50),
+                            color: Colors.green[800]!,
+                          ),
+                          child: MaterialButton(
+                            onPressed: () {
+                              setState(() {
+                                signOut(context);
+                              });
+                            },
+                            child: const Text(
+                              "Salir",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16.0,
+                              ),
+                            ),
                           ),
                         ),
                       ),
-                    ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+          if (isLoading)
+            const Center(
+              child: CircularProgressIndicator(), // Indicador de carga
+            ),
+        ],
       ),
     );
   }

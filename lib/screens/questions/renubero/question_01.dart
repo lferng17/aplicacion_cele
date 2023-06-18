@@ -58,6 +58,7 @@ class _Question01State extends State<Question01> {
         title: const Text('Pregunta 01/06'),
         centerTitle: true,
         backgroundColor: Colors.green[600],
+        automaticallyImplyLeading: false,
       ),
       body: Container(
         width: double.infinity,
