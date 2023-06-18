@@ -22,7 +22,7 @@ class _Question01PendonState extends State<Question01Pendon> {
       'Visualiza atentamente el contenido\nde este vídeo. Después tendrás\nque contestar algunas preguntas.';
 
   // Url del vídeo
-  String youtubeUrl = 'https://www.youtube.com/watch?v=cSR34CNXLvo';
+  String youtubeUrl = 'https://www.youtube.com/watch?v=eEM69n6kiFI';
 
   @override
   void initState() {
@@ -95,22 +95,33 @@ class _Question01PendonState extends State<Question01Pendon> {
                     padding: const EdgeInsets.all(30),
                     child: Column(
                       children: <Widget>[
+                        const SizedBox(
+                          height: 40,
+                        ),
                         Container(
                           decoration: BoxDecoration(
                             color: Colors.white,
-                            borderRadius: BorderRadius.circular(10),
+                            borderRadius: BorderRadius.circular(30),
                           ),
                           child: Link(
                             target: LinkTarget.blank,
-                            uri: Uri.parse(youtubeUrl), 
-                            builder: (BuildContext context, Future<void> Function()? followLink) => ElevatedButton(
+                            uri: Uri.parse(youtubeUrl),
+                            builder: (BuildContext context,
+                                    Future<void> Function()? followLink) =>
+                                ElevatedButton(
                               onPressed: followLink,
-                              child: const Text('Ver vídeo'),
+                              child: Text('Ver vídeo',
+                                  style: const TextStyle(
+                                      color: Colors.white, fontSize: 18)),
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.green[600]!,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30),
+                                ),
+                                minimumSize: const Size(140, 50),
+                              ),
                             ),
                           ),
-                        ),
-                        const SizedBox(
-                          height: 30,
                         ),
                         Container(
                           decoration: BoxDecoration(

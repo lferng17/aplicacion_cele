@@ -143,14 +143,14 @@ class _ThemeSelectionState extends State<ThemeSelection> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    "Bienvenido ${loggedInUser.firstName}",
+                    "¡Hola ${loggedInUser.firstName}!",
                     style: const TextStyle(color: Colors.white, fontSize: 40),
                   ),
                   const SizedBox(
                     height: 10,
                   ),
                   const Text(
-                    "Seleccione el tema a trabajar",
+                    "Selecciona el tema a trabajar",
                     style: TextStyle(color: Colors.white, fontSize: 18),
                   ),
                 ],
