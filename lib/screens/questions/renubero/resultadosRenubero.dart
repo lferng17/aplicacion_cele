@@ -116,29 +116,63 @@ class _ResultadosRenuberoState extends State<ResultadosRenubero> {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              child: Container(
-                height: 50,
-                width: 130,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(50),
-                  color: Colors.green[600]!,
-                ),
-                child: MaterialButton(
-                  onPressed: () {
-                    setState(() {
-                      signOut(context);
-                    });
-                  },
-                  child: const Text(
-                    "Salir",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16.0,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    child: Container(
+                      height: 50,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(50),
+                        color: Colors.green[600]!, 
+                      ),
+                      child: MaterialButton(
+                        onPressed: () {
+                          setState(() {
+                            Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                    builder: (context) => ResultadosRenubero()));
+                          });
+                        },
+                        child: const Text(
+                          "Recargar",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16.0,
+                          ),
+                        ),
+                      ),
                     ),
                   ),
-                ),
+                  const SizedBox(width: 10), // Espacio entre los botones
+                  Expanded(
+                    child: Container(
+                      height: 50,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(50),
+                        color: Colors.green[800]!,
+                      ),
+                      child: MaterialButton(
+                        onPressed: () {
+                          setState(() {
+                            signOut(context);
+                          });
+                        },
+                        child: const Text(
+                          "Salir",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16.0,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ],
