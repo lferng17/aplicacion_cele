@@ -48,6 +48,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_native_splash: ^2.2.18
+  flutter_launcher_icons: ^0.13.1
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -64,6 +65,11 @@ flutter_native_splash:
   web: false
   android_12:
     image: assets/circuloCELERemoveBG.png 
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/circuloCELERemoveBG.png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

@@ -297,7 +297,7 @@ class _Question04State extends State<Question04> {
       }),
       builder: (context, candidateData, rejectedData) => Container(
         width: 350,
-        height: 210,
+        height: 220,
         decoration: BoxDecoration(
           borderRadius: const BorderRadius.only(
               bottomLeft: Radius.circular(20),
@@ -341,7 +341,7 @@ class _Question04State extends State<Question04> {
       }),
       builder: (context, candidateData, rejectedData) => Container(
         width: 350,
-        height: 210,
+        height: 220,
         decoration: BoxDecoration(
           borderRadius: const BorderRadius.only(
               bottomLeft: Radius.circular(20),
