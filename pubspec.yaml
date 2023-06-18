@@ -47,6 +47,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_native_splash: ^2.2.18
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -54,6 +55,15 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
+
+flutter_native_splash:
+  color: "#ffffff"
+  image: "assets/circuloCELERemoveBG.png"
+  android: true
+  ios: true
+  web: false
+  android_12:
+    image: assets/circuloCELERemoveBG.png 
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -69,6 +79,8 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/LogoCELERemoveBG.png
+    - assets/LogoCELE.png
+    - assets/circuloCELERemoveBG.png
     - assets/pendones/
 
   # An image asset can refer to one or more resolution-specific "variants", see
