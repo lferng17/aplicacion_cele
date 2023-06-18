@@ -2,18 +2,24 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import '../../../models/student_model.dart';
-import '../../home.dart';
 
-class ResultadosRenubero extends StatefulWidget {
-  const ResultadosRenubero({Key? key}) : super(key: key);
+import '../../models/student_model.dart';
+import '../../models/user_model.dart';
+import '../home.dart';
+
+class Resultados extends StatefulWidget {
+
+  final String activityCode;
+  const Resultados(this.activityCode, {super.key});
 
   @override
-  _ResultadosRenuberoState createState() => _ResultadosRenuberoState();
+  _ResultadosState createState() => _ResultadosState();
 }
 
-class _ResultadosRenuberoState extends State<ResultadosRenubero> {
-  // user
+class _ResultadosState extends State<Resultados> {
+  //teacher
+  UserModel loggedInTeacher = UserModel();
+  // student
   StudentModel loggedInStudent = StudentModel();
   // Lista de estudiantes que han hecho la actividad
   List<StudentModel> students = [];
@@ -24,12 +30,12 @@ class _ResultadosRenuberoState extends State<ResultadosRenubero> {
     final User? currentUser = FirebaseAuth.instance.currentUser;
     if (currentUser != null) {
       FirebaseFirestore.instance
-          .collection('students')
+          .collection('users')
           .doc(currentUser.email)
           .get()
           .then((value) {
         setState(() {
-          loggedInStudent = StudentModel.fromMap(value.data());
+          loggedInTeacher = UserModel.fromMap(value.data());
         });
       });
     }
@@ -44,7 +50,7 @@ class _ResultadosRenuberoState extends State<ResultadosRenubero> {
         var data = document.data() as Map<String, dynamic>;
         var activityCode = data['activityCode'] as String?;
         if (activityCode != null &&
-            activityCode == loggedInStudent.activityCode) {
+            activityCode == widget.activityCode) {
           students.add(StudentModel.fromMap(data));
         }
       });
@@ -64,6 +70,11 @@ class _ResultadosRenuberoState extends State<ResultadosRenubero> {
 
   @override
   Widget build(BuildContext context) {
+    //Imprimir la lista de todos los estudiantes
+    students.forEach((element) {
+      print(element.alias);
+    });
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Resultados'),
@@ -90,7 +101,7 @@ class _ResultadosRenuberoState extends State<ResultadosRenubero> {
                 children: <Widget>[
                   Center(
                     child: Text(
-                      'Resultados Actividad ${loggedInStudent.activityCode}',
+                      'Resultados Actividad ${widget.activityCode}',
                       style: const TextStyle(color: Colors.white, fontSize: 22),
                     ),
                   ),
@@ -131,6 +142,31 @@ class _ResultadosRenuberoState extends State<ResultadosRenubero> {
                   },
                   child: const Text(
                     "Salir",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16.0,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              child: Container(
+                height: 50,
+                width: 130,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(50),
+                  color: Colors.green[600]!,
+                ),
+                child: MaterialButton(
+                  onPressed: () {
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => Resultados(widget.activityCode)));
+                  },
+                  child: const Text(
+                    "Recargar",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.white,

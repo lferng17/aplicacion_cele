@@ -286,7 +286,6 @@ class _HomeState extends State<Home> {
         .doc(user.email)
         .set(studentModel.toMap());
 
-    Fluttertoast.showToast(msg: "Cuenta creada correctamente");
   }
 
   // Login function
@@ -294,7 +293,6 @@ class _HomeState extends State<Home> {
     await _auth
         .signInWithEmailAndPassword(email: email, password: password)
         .then((uid) => {
-              Fluttertoast.showToast(msg: "Student Login successful"),
               Navigator.of(context).pushReplacement(
                   MaterialPageRoute(builder: (context) => WaitingPage()))
             })

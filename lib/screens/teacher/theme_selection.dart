@@ -1,9 +1,11 @@
 import 'dart:math';
 
 import 'package:aplicacion_cele/screens/home.dart';
+import 'package:aplicacion_cele/screens/teacher/resultados.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:quickalert/quickalert.dart';
 
 import '../../models/user_model.dart';
 
@@ -51,25 +53,23 @@ class _ThemeSelectionState extends State<ThemeSelection> {
         onPressed: () {
           // generar codigo aleatorio
           String code = codigoAleatorio();
-          //Ventana emergente para mostrar el codigo, con un botón para aceptar y cerrar la ventana y la sesión
-          showDialog(
-              context: context,
-              builder: (BuildContext context) {
-                return AlertDialog(
-                  title: const Text("Código de acceso"),
-                  content: Text(code),
-                  actions: [
-                    TextButton(
-                      onPressed: () {
-                        // cerrar ventana emergente, sesión y volver a la pantalla de Home
-                        Navigator.of(context).pop();
-                        signOut(context);
-                      },
-                      child: const Text("Aceptar"),
-                    ),
-                  ],
-                );
-              });
+          //QuickAlert para mostrar el codigo, con un botón para aceptar y redirijir a la pantalla de resultados
+          QuickAlert.show(
+            context: context,
+            type: QuickAlertType.success,
+            title: code,
+            text: 'Código de la actividad',
+            confirmBtnText: 'Clasificación',
+            onConfirmBtnTap: (){
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Resultados(code),
+                ),
+              );
+            }
+          );
+
           // guardar actividad en la base de datos
           addActivity(code, 'renubero');
         },
@@ -96,25 +96,17 @@ class _ThemeSelectionState extends State<ThemeSelection> {
         onPressed: () {
           // generar codigo aleatorio
           String code = codigoAleatorio();
-          //Ventana emergente para mostrar el codigo, con un botón para aceptar y cerrar la ventana y la sesión
-          showDialog(
-              context: context,
-              builder: (BuildContext context) {
-                return AlertDialog(
-                  title: const Text("Código de acceso"),
-                  content: Text(code),
-                  actions: [
-                    TextButton(
-                      onPressed: () {
-                        // cerrar ventana emergente, sesión y volver a la pantalla de Home
-                        Navigator.of(context).pop();
-                        signOut(context);
-                      },
-                      child: const Text("Aceptar"),
-                    ),
-                  ],
-                );
-              });
+          //QuickAlert para mostrar el codigo, con un botón para aceptar y redirijir a la pantalla de resultados
+          QuickAlert.show(
+            context: context,
+            type: QuickAlertType.success,
+            title: code,
+            text: 'Código de la actividad',
+            confirmBtnText: 'Salir',
+            onConfirmBtnTap: (){
+              signOut(context);
+            }
+          );
           // guardar actividad en la base de datos
           addActivity(code, 'pendon');
         },
