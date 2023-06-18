@@ -2,6 +2,7 @@ import 'package:aplicacion_cele/screens/questions/pendones/question_03.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:quickalert/quickalert.dart';
 
 import '../../../models/student_model.dart';
 
@@ -19,7 +20,6 @@ class _Question02PendonState extends State<Question02Pendon> {
   // Pregunta
   String question =
       'Toca en cada una de las partes del pendón para leer su explicación.';
-
 
   @override
   void initState() {
@@ -94,7 +94,6 @@ class _Question02PendonState extends State<Question02Pendon> {
                         const SizedBox(
                           height: 30,
                         ),
-                        
                         Container(
                           decoration: BoxDecoration(
                             color: Colors.white,
@@ -106,7 +105,7 @@ class _Question02PendonState extends State<Question02Pendon> {
                               double x = details.localPosition.dx;
                               double y = details.localPosition.dy;
 
-                              // Tamaño de la imagen 
+                              // Tamaño de la imagen
                               double imageWidth = 400;
                               double imageHeight = 330;
 
@@ -115,17 +114,39 @@ class _Question02PendonState extends State<Question02Pendon> {
                               double selectedPartY = y / imageHeight;
 
                               // Verifica la parte seleccionada y muestra la información correspondiente
-                              if (selectedPartX < 0.5 && selectedPartX > 0.2 && selectedPartY < 0.3) {
-                                showInfoDialog(
-                                    context, 'Cruz', 'Representan la tradición y la historia de la región de León, añadiendo un elemento distintivo al diseño del estandarte.');
-                              } else if (selectedPartX >= 0.5 && selectedPartX <= 0.8 &&
-                                  selectedPartY < 0.5 && selectedPartY > 0.3) {
-                                showInfoDialog(
-                                    context, 'Paño', 'Confeccionado en tela de alta calidad, muestra diseños representativos con escudos heráldicos y símbolos tradicionales, reflejando la identidad local.');
+                              if (selectedPartX < 0.5 &&
+                                  selectedPartX > 0.2 &&
+                                  selectedPartY < 0.3) {
+                                QuickAlert.show(
+                                  context: context,
+                                  type: QuickAlertType.info,
+                                  confirmBtnText: '¡Genial!',
+                                  title: 'Cruz',
+                                  text:
+                                      'Representan la tradición y la historia de la región de León, añadiendo un elemento distintivo al diseño del estandarte.',
+                                );
+                              } else if (selectedPartX >= 0.5 &&
+                                  selectedPartX <= 0.8 &&
+                                  selectedPartY < 0.5 &&
+                                  selectedPartY > 0.3) {
+                                QuickAlert.show(
+                                  context: context,
+                                  type: QuickAlertType.info,
+                                  confirmBtnText: '¡Genial!',
+                                  title: 'Paño',
+                                  text:
+                                      'Confeccionado en tela de alta calidad, muestra diseños representativos con escudos heráldicos y símbolos tradicionales, reflejando la identidad local.',
+                                );
                               } else if (selectedPartX < 0.2 &&
                                   selectedPartY >= 0.5) {
-                                showInfoDialog(
-                                    context, 'Mástil', 'Largo y resistente, proporciona soporte y estabilidad al pendón, permitiendo que se exhiba con orgullo en desfiles y eventos. ');
+                                QuickAlert.show(
+                                  context: context,
+                                  type: QuickAlertType.info,
+                                  confirmBtnText: '¡Genial!',
+                                  title: 'Mástil',
+                                  text:
+                                      'Largo y resistente, proporciona soporte y estabilidad al pendón, permitiendo que se exhiba con orgullo en desfiles y eventos. ',
+                                );
                               }
                             },
                             child: Image.asset(
@@ -182,42 +203,39 @@ class _Question02PendonState extends State<Question02Pendon> {
     );
   }
 
-
   void showInfoDialog(BuildContext context, String titulo, String info) {
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return AlertDialog(
-        title: Text(
-          titulo,
-          style: const TextStyle(
-            fontSize: 22,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        content: Text(
-          info,
-          style: const TextStyle(
-            fontSize: 18,
-          ),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            child: const Text(
-              'Cerrar',
-              style: TextStyle(
-                fontSize: 16,
-              ),
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(
+            titulo,
+            style: const TextStyle(
+              fontSize: 22,
+              fontWeight: FontWeight.bold,
             ),
           ),
-        ],
-      );
-    },
-  );
-}
-
-
+          content: Text(
+            info,
+            style: const TextStyle(
+              fontSize: 18,
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text(
+                'Cerrar',
+                style: TextStyle(
+                  fontSize: 16,
+                ),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
 }

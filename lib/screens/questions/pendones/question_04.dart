@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
 import '../../../models/student_model.dart';
+import '../../home.dart';
 
 class Question04Pendon extends StatefulWidget {
   const Question04Pendon({Key? key}) : super(key: key);
@@ -139,16 +140,11 @@ class _Question04PendonState extends State<Question04Pendon> {
                         child: MaterialButton(
                           onPressed: () {
                             setState(() {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => Question04Pendon(),
-                                ),
-                              );
-                            });
+                                signOut(context);
+                              });
                           },
                           child: const Text(
-                            "Siguiente",
+                            "Salir",
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               color: Colors.white,
@@ -157,6 +153,9 @@ class _Question04PendonState extends State<Question04Pendon> {
                             ),
                           ),
                         ),
+                      ),
+                      const SizedBox(
+                        height: 40,
                       ),
                     ],
                   ),
@@ -203,5 +202,11 @@ class _Question04PendonState extends State<Question04Pendon> {
             width: 250,
           )),
     );
+  }
+
+  Future<void> signOut(BuildContext context) async {
+    await FirebaseAuth.instance.signOut();
+    Navigator.of(context)
+        .pushReplacement(MaterialPageRoute(builder: (context) => Home()));
   }
 }
