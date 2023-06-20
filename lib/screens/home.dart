@@ -79,7 +79,7 @@ class _HomeState extends State<Home> {
       margin: const EdgeInsets.symmetric(horizontal: 50),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(50),
-          color: const Color.fromARGB(255, 135, 207, 122)),
+          color: Colors.green[400]),
       child: MaterialButton(
         minWidth: MediaQuery.of(context).size.width,
         onPressed: () async {

@@ -90,7 +90,7 @@ class _LoginTeacherState extends State<LoginTeacher> {
       margin: const EdgeInsets.symmetric(horizontal: 50),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(50),
-          color: const Color.fromARGB(255, 123, 197, 110)),
+          color: Colors.green[400]!),
       child: MaterialButton(
         minWidth: MediaQuery.of(context).size.width,
         padding: const EdgeInsets.fromLTRB(10.0, 15.0, 10.0, 15.0),
@@ -162,7 +162,7 @@ class _LoginTeacherState extends State<LoginTeacher> {
                               borderRadius: BorderRadius.circular(10),
                               boxShadow: const [
                                 BoxShadow(
-                                    color: Color.fromRGBO(62, 159, 29, 0.294),
+                                    color: Color.fromRGBO(17, 79, 179, 0.29),
                                     blurRadius: 20,
                                     offset: Offset(0, 10))
                               ]),
